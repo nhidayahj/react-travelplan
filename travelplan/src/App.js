@@ -1,18 +1,16 @@
-import './App.css';
+// import './App.css';
 import React from 'react'
 // import react router 
 import { BrowserRouter as Router} from "react-router-dom"
 
-import HomeNavBar from './HomeNavBar'
-
+// import HomeNavBar from './HomeNavBar'
+import Review from './pages/Review'
 
 function App() {
     return (
-        <Router>
-            <HomeNavBar/>
-           
-            
-        </Router>
+        <React.Fragment>
+            <Review/>
+        </React.Fragment>
     );
 }
 

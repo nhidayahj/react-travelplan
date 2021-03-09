@@ -4,6 +4,7 @@ MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggle
 MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem
 } from "mdbreact";
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import Homepage from './pages/Homepage'
 import Americas from './pages/Americas'
 import Europe from './pages/Europe'
 import Asia from './pages/Asia'
@@ -32,7 +33,7 @@ render() {
         <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
           <MDBNavbarNav left>
             <MDBNavItem active>
-              <MDBNavLink to="#!">Home</MDBNavLink>
+              <MDBNavLink to="/homepage">Home</MDBNavLink>
             </MDBNavItem>
             <MDBNavItem>
               <MDBDropdown>
@@ -69,6 +70,9 @@ render() {
         </MDBCollapse>
       </MDBNavbar>
       <Switch>
+          <Route exact path="/homepage">
+              <Homepage/>
+          </Route>
           <Route exact path="/americas">
               <Americas/>
           </Route>
