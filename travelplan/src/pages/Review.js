@@ -54,27 +54,38 @@ export default class Review extends React.Component {
         })
     }
 
-    submitReview = async () => {
-        let category_id = await axios.post(baseUrl + '/category/review', {
-            review_category:this.state.reviewCategory
-        })
-        // console.log(category_id.data._id)
-        console.log(category_id.data.insertedId)
 
-        await axios.post(baseUrl + '/createreviews', {
+    submitReview = async () => {
+        // let category_id = await axios.post(baseUrl + '/category/review', {
+        //     review_category:this.state.reviewCategory
+        // })
+        // // console.log(category_id.data._id)
+        // console.log(category_id.data.insertedId)
+    
+        let all_review = await axios.post(baseUrl + '/createreviews', {
             username: this.state.username,
             usercode: this.state.usercode,
-            countryName: this.state.country,
+            countryName : this.state.country,
             cityTown: this.state.city,
-            reviewCategory:category_id.data.insertedId,
+            reviewCategory:this.state.reviewCategory,
             reviewType: this.state.review_cat_type,
             nameOfPlace: this.state.nameOfPlace,
             reviewAddress: this.state.address,
             reviewTags: this.state.tags,
             reviewDesc: this.state.reviewDesc,
             imageLink: this.state.image,
-            ratings: this.state.ratings
+            ratings: this.state.ratings,
+           
         })
+        console.log(all_review.data)
+        console.log("review id: ", all_review.data._id)
+
+        // await axios.post(baseUrl + '/country', {
+        //     review_id:all_review.data.insertedId,
+        //     countryName: this.state.country,
+        //     cityName: this.state.city
+        // })
+        // console.log(all_review.data.insertedId)
 
 
 
@@ -90,11 +101,11 @@ export default class Review extends React.Component {
                     <label>Country: </label>
                     <select name="country" value={this.state.country} onChange={this.userFill}>
                         <option> -- Select Country --</option>
-                        <option value="australia">Australia</option>
-                        <option value="japan">Japan</option>
-                        <option value="korea">Korea</option>
-                        <option value="thailand">Thailand</option>
-                        <option value="taiwan">Taiwan</option>
+                        <option value="Australia">Australia</option>
+                        <option value="Japan">Japan</option>
+                        <option value="Korea">Korea</option>
+                        <option value="Thailand">Thailand</option>
+                        <option value="Taiwan">Taiwan</option>
                     </select>
                 </div>
 
