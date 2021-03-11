@@ -1,15 +1,17 @@
 // import './App.css';
 import React from 'react'
 // import react router 
-import { BrowserRouter as Router} from "react-router-dom"
+// import { BrowserRouter as Router} from "react-router-dom"
 
 // import HomeNavBar from './HomeNavBar'
-import Review from './pages/Review'
+// import CreateReview from './pages/CreateReview'
+import ShowReviews from './pages/ShowReviews'
 
 function App() {
     return (
         <React.Fragment>
-            <Review/>
+            {/* <CreateReview/> */}
+            <ShowReviews/>
         </React.Fragment>
     );
 }

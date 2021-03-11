@@ -3,7 +3,7 @@ import axios from 'axios'
 
 const baseUrl = "https://3001-tan-dog-b6spunp9.ws-us03.gitpod.io"
 
-export default class Review extends React.Component {
+export default class CreateReview extends React.Component {
     state = {
         username: "",
         usercode: Math.floor(Math.random() * 9999 + 10000),
@@ -45,7 +45,7 @@ export default class Review extends React.Component {
             modifiedActivities = [...currentActivities, e.target.value]
         } else {
             modifiedActivities = currentActivities.filter((element) => {
-                return element != e.target.value
+                return element !== e.target.value
             })
         }
 
@@ -79,16 +79,6 @@ export default class Review extends React.Component {
         })
         console.log(all_review.data)
         console.log("review id: ", all_review.data._id)
-
-        // await axios.post(baseUrl + '/country', {
-        //     review_id:all_review.data.insertedId,
-        //     countryName: this.state.country,
-        //     cityName: this.state.city
-        // })
-        // console.log(all_review.data.insertedId)
-
-
-
     }
 
     render() {
@@ -120,19 +110,19 @@ export default class Review extends React.Component {
                     <label>Review Category: </label>
                     <select name="reviewCategory" value={this.state.reviewCategory} onChange={this.userFill}>
                         <option>-- Select Review type --</option>
-                        <option value="accommodation">Accommodation</option>
-                        <option value="restaurant">Restaurants</option>
-                        <option value="activities">Activities</option>
+                        <option value="Accommodation">Accommodation</option>
+                        <option value="Restaurant">Restaurants</option>
+                        <option value="Activities">Activities</option>
 
                     </select>
                 </div>
 
-                <div style={{ display: this.displayActivities() === "accommodation" ? 'block' : 'none' }}>
+                <div style={{ display: this.displayActivities() === "Accommodation" ? 'block' : 'none' }}>
                     <div>
                         <h4>Accommodation Type: </h4>
-                        <input type="radio" name="review_cat_type" value="hotel" onChange={this.userFill} checked={this.state.review_cat_type == "hotel"} /> Hotel
-                            <input type="radio" name="review_cat_type" value="airbnb" onChange={this.userFill} checked={this.state.review_cat_type == "airbnb"} /> Airbnb
-                            <input type="radio" name="review_cat_type" value="hostel" onChange={this.userFill} checked={this.state.review_cat_type == "hostel"} /> Hostel
+                        <input type="radio" name="review_cat_type" value="hotel" onChange={this.userFill} checked={this.state.review_cat_type === "hotel"} /> Hotel
+                            <input type="radio" name="review_cat_type" value="airbnb" onChange={this.userFill} checked={this.state.review_cat_type === "airbnb"} /> Airbnb
+                            <input type="radio" name="review_cat_type" value="hostel" onChange={this.userFill} checked={this.state.review_cat_type === "hostel"} /> Hostel
                     </div>
 
                     {/* Acccommodation Details */}
@@ -223,7 +213,7 @@ export default class Review extends React.Component {
                 </div>
                 {/* End of Accommodation */}
 
-                <div style={{ display: this.displayActivities() === "restaurant" ? 'block' : 'none' }}>
+                <div style={{ display: this.displayActivities() === "Restaurant" ? 'block' : 'none' }}>
 
                     {/* Restaurant Details */}
                     <div>
@@ -331,9 +321,9 @@ export default class Review extends React.Component {
                     {/* Ratings */}
                     <div>
                         <h4>Ratings</h4>
-                        <input type="radio" name="ratings" value="poor" checked={this.state.ratings == "poor"} onChange={this.userFill} />Poor
-                       <input type="radio" name="ratings" value="good" checked={this.state.ratings == "good"} onChange={this.userFill} />Good
-                       <input type="radio" name="ratings" value="excellent" checked={this.state.ratings == "excellent"} onChange={this.userFill} />Excellent
+                        <input type="radio" name="ratings" value="poor" checked={this.state.ratings === "poor"} onChange={this.userFill} />Poor
+                       <input type="radio" name="ratings" value="good" checked={this.state.ratings === "good"} onChange={this.userFill} />Good
+                       <input type="radio" name="ratings" value="excellent" checked={this.state.ratings === "excellent"} onChange={this.userFill} />Excellent
 
                    </div>
 
@@ -352,7 +342,7 @@ export default class Review extends React.Component {
                 </div>
                 {/* End of restaurant */}
 
-                <div style={{ display: this.displayActivities() === 'activities' ? 'block' : 'none' }}>
+                <div style={{ display: this.displayActivities() === 'Activities' ? 'block' : 'none' }}>
                     {/* type of activities */}
                     <div>
                         <h4>Type of Travel Activities</h4>
