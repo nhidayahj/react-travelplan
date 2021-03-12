@@ -27,12 +27,12 @@ export default class CreateReview extends React.Component {
 
 
     displayActivities() {
-        if (this.state.reviewCategory === "accommodation") {
-            return "accommodation"
-        } else if (this.state.reviewCategory === "restaurant") {
-            return "restaurant"
-        } else if (this.state.reviewCategory === "activities") {
-            return "activities"
+        if (this.state.reviewCategory === "Accommodation") {
+            return "Accommodation"
+        } else if (this.state.reviewCategory === "Restaurant") {
+            return "Restaurant"
+        } else if (this.state.reviewCategory === "Activities") {
+            return "Activities"
         }
     }
 

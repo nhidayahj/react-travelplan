@@ -1,25 +1,26 @@
 import React from 'react'
+import Header from '../Header';
 
-function Homepage(props) {
-    
-    return (
-        <React.Fragment>
-            <h3>Popular Destinations</h3>
+
+export default class Homepage extends React.Component {
+    state = {
+
+    }
+    render() {
+        return (
+            <React.Fragment>
+                <Header/>
                 <div>
-                    <button props="">Australia</button>
-                    <button>Japan</button>
-                    <button>Korea</button>
-                    <button>Taiwan</button>
-                    <button>Thailand</button>
+                    <button>Australia</button>
+                    <button Link to="/japan">Japan</button>
+                    <button Link to="/korea">Korea</button>
+                    <button Link to="/taiwan">Taiwan</button>
+                    <button Link to="/thailand">Thailand</button>
                 </div>
-                <div>
-                    <h3>Places & Experiences</h3>
-                    <button>Accommodation</button>
-                    <button>Restaurants</button>
-                    <button>Travel Activities</button>
-                </div>
-        </React.Fragment>
-    )
+            </React.Fragment>
+        )
+    }
 }
 
-export default Homepage;
+
+
