@@ -5,6 +5,7 @@ const baseUrl = "https://3001-tan-dog-b6spunp9.ws-us03.gitpod.io"
 
 export default class ShowReviews extends React.Component {
     state = {
+        country:this.props.country,
         all_reviews: [],
         all_country:[]
     }
