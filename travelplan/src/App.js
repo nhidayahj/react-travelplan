@@ -1,6 +1,5 @@
 import './App.css';
 import React from 'react'
-// import react router 
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 // import ShowReviews from './pages/ShowReviews'
