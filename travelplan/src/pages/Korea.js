@@ -38,7 +38,7 @@ export default class Korea extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <h3>Korea</h3>
+                <h3>South Korea</h3>
                 <div>
                     <button>Accommodation</button>
                     <button>Restaurant</button>

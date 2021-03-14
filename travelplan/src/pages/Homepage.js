@@ -1,8 +1,8 @@
 import React from 'react'
-import { Container, Row, Col } from 'reactstrap'
+import { Container, Row, Col, Button } from 'reactstrap'
 import {
     Card, CardImg, CardText, CardBody,
-    CardTitle, CardSubtitle, Button
+    CardTitle, CardSubtitle, Badge
 } from 'reactstrap';
 import { Link } from 'react-router-dom'
 import axios from 'axios'
@@ -11,13 +11,15 @@ const baseUrl = "https://3001-tan-dog-b6spunp9.ws-us03.gitpod.io/all"
 
 export default class Homepage extends React.Component {
     state = {
-        all_countries: []
+        all_countries: [],
+        all_reviews: []
     }
 
     async componentDidMount() {
-        let allCountries = await axios.get(baseUrl)
+        let result = await axios.get(baseUrl)
         this.setState({
-            all_countries: allCountries.data
+            all_countries: result.data[0],
+            all_reviews: result.data[1]
         })
     }
 
@@ -29,11 +31,11 @@ export default class Homepage extends React.Component {
                 <Col sm="4">
                     <Card outline color="info" className="card-country">
                         <CardImg className="each-card" top width="100%" src={i.image_url} alt="country image cap" />
-                        <CardBody>
+                        <CardBody className="each-card-body">
                             <CardTitle className="text-center" tag="h5">{i.country}</CardTitle>
-                            <CardSubtitle tag="h6" className="mb-2 text-muted text-center">Card subtitle</CardSubtitle>
-                            <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-                            <Button>Button</Button>
+                            {/* <CardSubtitle tag="h6" className="mb-2 text-muted text-center">Card subtitle</CardSubtitle> */}
+                            <CardText>{i.description}</CardText>
+                            <Link to={i.country}><Badge href="#" color="info" pill>explore</Badge></Link>
                         </CardBody>
                     </Card>
                 </Col>
@@ -47,14 +49,12 @@ export default class Homepage extends React.Component {
         return (
             <React.Fragment>
                 <div className="page-img">
-
+                    <span className="home-title">wanderLust</span>
                 </div>
                 <Container>
-
-
                     <div className="home-section">
                         <div className="title-header">
-                            <h3 className="page-title">Popular Destinations</h3>
+                            <h3 className="page-title">Popular Destination</h3>
                         </div>
                         <div>
                             <Row>
@@ -67,11 +67,10 @@ export default class Homepage extends React.Component {
                         <div className="title-header">
                             <h3 className="page-title">Places & Experiences</h3>
                         </div>
-                        <Link to="/australia"><button>Australia</button></Link>
-                        <Link to="/japan"><button>Japan</button></Link>
-                        <Link to="/korea"><button>Korea</button></Link>
-                        <Link to="/taiwan"><button>Taiwan</button></Link>
-                        <Link to="/thailand"><button>Thailand</button></Link>
+                        <div >
+
+                        </div>
+                        
                     </div>
                 </Container>
 

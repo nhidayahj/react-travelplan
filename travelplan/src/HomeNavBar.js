@@ -25,13 +25,13 @@ function HomeNavBar (props) {
   return (
     <div>
       <Navbar color="light" light expand="md">
-        <Link to="/"><NavbarBrand className="page-title">wonderGo</NavbarBrand></Link>
+        <Link to="/"><NavbarBrand className="page-title">wanderLust</NavbarBrand></Link>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="me-auto" navbar>
             <UncontrolledDropdown nav inNavbar>
               <DropdownToggle nav caret>
-                Destinations
+                Destination
               </DropdownToggle>
               <DropdownMenu right>
                     <Link to="/australia">
@@ -46,7 +46,7 @@ function HomeNavBar (props) {
                     </Link>
                     <Link to="/korea">
                         <DropdownItem>
-                        Korea
+                        South Korea
                         </DropdownItem>
                     </Link>
                     <Link to="/taiwan">

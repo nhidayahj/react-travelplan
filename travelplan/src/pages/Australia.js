@@ -5,6 +5,7 @@ import {
     Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle, Button
 } from 'reactstrap';
+import Filters from '../Filters'
 
 
 const baseUrl = "https://3001-tan-dog-b6spunp9.ws-us03.gitpod.io/australia"
@@ -13,7 +14,7 @@ export default class Australia extends React.Component {
     state = {
         aus_reviews: [],
         country: [],
-        filter_btn: "",
+        filter_btn: this.props.filter_search,
 
     }
 
@@ -85,6 +86,9 @@ export default class Australia extends React.Component {
         return (
             <React.Fragment>
                 <h3 className="country">Australia</h3>
+                <Filters filter_search=""/>
+                
+
                 <div>
                     <button name="filter_btn" value="home" onClick={this.filterBtn}>Home</button>
                     <button name="filter_btn" value="Accommodation" onClick={this.filterBtn}>Accommodation</button>
