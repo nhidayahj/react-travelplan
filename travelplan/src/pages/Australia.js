@@ -84,7 +84,7 @@ export default class Australia extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <h3>Australia</h3>
+                <h3 className="country">Australia</h3>
                 <div>
                     <button name="filter_btn" value="home" onClick={this.filterBtn}>Home</button>
                     <button name="filter_btn" value="Accommodation" onClick={this.filterBtn}>Accommodation</button>

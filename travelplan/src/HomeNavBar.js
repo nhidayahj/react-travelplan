@@ -25,7 +25,7 @@ function HomeNavBar (props) {
   return (
     <div>
       <Navbar color="light" light expand="md">
-        <NavbarBrand href="/" className="page-title">wonderGo</NavbarBrand>
+        <Link to="/"><NavbarBrand className="page-title">wonderGo</NavbarBrand></Link>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="me-auto" navbar>
