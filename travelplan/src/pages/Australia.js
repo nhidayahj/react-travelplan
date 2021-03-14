@@ -1,7 +1,10 @@
 import React from 'react'
 import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button } from 'reactstrap';
+import {
+    Card, CardImg, CardText, CardBody,
+    CardTitle, CardSubtitle, Button
+} from 'reactstrap';
 
 
 const baseUrl = "https://3001-tan-dog-b6spunp9.ws-us03.gitpod.io/australia"
@@ -26,13 +29,25 @@ export default class Australia extends React.Component {
         let aus_accum = [];
         for (let i of this.state.aus_reviews) {
             aus_accum.push(
+                // <div key={i._id}>
+                //     <p>City: {i.city_town}</p>
+                //     <p>Category: {i.review_category}</p>
+                //     <p>Review Description: {i.review_desc}</p>
+                //     <p>Reviewed by: {i.username}</p>
+                //     <Button outline color="primary" size="sm">Update</Button>{' '}
+                //     <Button color="danger" size="sm">Delete</Button>
+                // </div>
                 <div key={i._id}>
-                    <p>City: {i.city_town}</p>
-                    <p>Category: {i.review_category}</p>
-                    <p>Review Description: {i.review_desc}</p>
-                    <p>Reviewed by: {i.username}</p>
-                    <button>Update</button>
-                    <button>Delete</button>
+                    <Card>
+                        <CardImg top width="25%" height="50%" src="https://images.squarespace-cdn.com/content/v1/55ee34aae4b0bf70212ada4c/1577545161018-1F9Z9ZZQG9JO2O4WCWQX/ke17ZwdGBToddI8pDm48kLkXF2pIyv_F2eUT9F60jBl7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0iyqMbMesKd95J-X4EagrgU9L3Sa3U8cogeb0tjXbfawd0urKshkc5MgdBeJmALQKw/keith-zhu-qaNcz43MeY8-unsplash+%281%29.jpg?format=1500w" alt="Card image cap" />
+                        <CardBody>
+                            <CardTitle tag="h5">City: {i.city_town}</CardTitle>
+                            <CardSubtitle tag="h6" className="mb-2 text-muted">Reviewed by: {i.username}</CardSubtitle>
+                            <CardText>{i.review_desc}</CardText>
+                            <Button outline color="primary" size="sm">Update</Button>{' '}
+                            <Button color="danger" size="sm">Delete</Button>
+                        </CardBody>
+                    </Card>
                 </div>
             )
         }
@@ -56,8 +71,8 @@ export default class Australia extends React.Component {
                         <p>Category: {i.review_category}</p>
                         <p>Review Description: {i.review_desc}</p>
                         <p>Reviewed by: {i.username}</p>
-                        <Button outline color="primary">Update</Button>{' '}
-                        <Button>Delete</Button>
+                        <Button outline color="primary" size="sm">Update</Button>{' '}
+                        <Button color="danger" size="sm">Delete</Button>
                     </div>
                 )
             }

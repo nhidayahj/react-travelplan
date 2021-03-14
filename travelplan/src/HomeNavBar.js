@@ -1,97 +1,95 @@
-import React from "react";
+import './App.css';
+import React, {useState} from 'react';
+import {Link} from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import {
-MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBFormInline,
-MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem
-} from "mdbreact";
-import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-import Homepage from './pages/Homepage'
-import Americas from './pages/Americas'
-import Europe from './pages/Europe'
-import Asia from './pages/Asia'
-import Africa from './pages/Africa'
-import Oceania from './pages/Oceania'
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+} from 'reactstrap';
 
 
 
-class NavbarPage extends React.Component {
-state = {
-  isOpen: false
-};
 
-toggleCollapse = () => {
-  this.setState({ isOpen: !this.state.isOpen });
-}
+function HomeNavBar (props) {
+  const [isOpen, setIsOpen] = useState(false);
 
-render() {
+  const toggle = () => setIsOpen(!isOpen);
+
   return (
-    <Router>
-      <MDBNavbar color="indigo" dark expand="md">
-        <MDBNavbarBrand>
-          <strong className="white-text">wonderGo</strong>
-        </MDBNavbarBrand>
-        <MDBNavbarToggler onClick={this.toggleCollapse} />
-        <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
-          <MDBNavbarNav left>
-            <MDBNavItem active>
-              <MDBNavLink to="/homepage">Home</MDBNavLink>
-            </MDBNavItem>
-            <MDBNavItem>
-              <MDBDropdown>
-                <MDBDropdownToggle nav caret>
-                  <span className="mr-2">Destination</span>
-                </MDBDropdownToggle>
-                <MDBDropdownMenu>
-                  <MDBDropdownItem href="/americas">Americas</MDBDropdownItem>
-                  <MDBDropdownItem href="/europe">Europe</MDBDropdownItem>
-                  <MDBDropdownItem href="/asia">Asia</MDBDropdownItem>
-                  <MDBDropdownItem href="africa">Africa</MDBDropdownItem>
-                  <MDBDropdownItem href="/oceania">Oceania / Australia</MDBDropdownItem>
-                  
-                </MDBDropdownMenu>
-              </MDBDropdown>
-            </MDBNavItem>
-            <MDBNavItem>
-              <MDBNavLink to="/allExperience">Experience</MDBNavLink>
-            </MDBNavItem>
-            <MDBNavItem>
-              <MDBNavLink to="#!">Blogs</MDBNavLink>
-            </MDBNavItem>
+    <div>
+      <Navbar color="light" light expand="md">
+        <NavbarBrand href="/">wonderGo</NavbarBrand>
+        <NavbarToggler onClick={toggle} />
+        <Collapse isOpen={isOpen} navbar>
+          <Nav className="me-auto" navbar>
+            <UncontrolledDropdown nav inNavbar>
+              <DropdownToggle nav caret>
+                Destinations
+              </DropdownToggle>
+              <DropdownMenu right>
+                    <Link to="/australia">
+                        <DropdownItem>
+                        Australia
+                        </DropdownItem>
+                    </Link>
+                    <Link to="/japan">
+                        <DropdownItem>
+                        Japan
+                        </DropdownItem>
+                    </Link>
+                    <Link to="/korea">
+                        <DropdownItem>
+                        Korea
+                        </DropdownItem>
+                    </Link>
+                    <Link to="/taiwan">
+                        <DropdownItem>
+                        Taiwan
+                        </DropdownItem>
+                    </Link>
+                    <Link to="/thailand">
+                        <DropdownItem>
+                        Thailand
+                        </DropdownItem>
+                    </Link>
+              </DropdownMenu>
+            </UncontrolledDropdown>
+            <UncontrolledDropdown nav inNavbar>
+              <DropdownToggle nav caret>
+                Experiences
+              </DropdownToggle>
+              <DropdownMenu right>
+                <Link to="/accommodations">
+                        <DropdownItem>
+                        Accommodations
+                        </DropdownItem>
+                    </Link>
+                <Link to="/restaurants">
+                        <DropdownItem>
+                        Restaurants
+                        </DropdownItem>
+                    </Link>
+                <Link to="/activities">
+                        <DropdownItem>
+                        Activities
+                        </DropdownItem>
+                    </Link>
+              </DropdownMenu>
+            </UncontrolledDropdown>
             
-          </MDBNavbarNav>
-          <MDBNavbarNav right>
-            <MDBNavItem>
-              <MDBFormInline waves>
-                <div className="md-form my-0">
-                  <input className="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" />
-                </div>
-              </MDBFormInline>
-            </MDBNavItem>
-          </MDBNavbarNav>
-        </MDBCollapse>
-      </MDBNavbar>
-      <Switch>
-          <Route exact path="/homepage">
-              <Homepage/>
-          </Route>
-          <Route exact path="/americas">
-              <Americas/>
-          </Route>
-          <Route exact path="/europe">
-              <Europe/>
-          </Route>
-          <Route exact path="/asia">
-              <Asia/>
-          </Route>
-          <Route exact path="/africa">
-              <Africa/>
-          </Route>
-          <Route exact path="/oceania">
-              <Oceania/>
-          </Route>
-      </Switch>
-    </Router>
-    );
-  }
+          </Nav>
+         
+        </Collapse>
+      </Navbar>
+    </div>
+  );
 }
 
-export default NavbarPage;
+export default HomeNavBar;
