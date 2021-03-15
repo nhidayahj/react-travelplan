@@ -4,8 +4,9 @@
 
 
 .page-title {
-    margin-top:8px;
+    margin-top:12px;
     font-family: 'Poppins', sans-serif;
+    font-size:30px;
 }
 
 .title-header {
@@ -16,7 +17,7 @@
     display:flex;
     justify-content: center;
     font-family: 'Poppins', sans-serif;
-    font-size: 35px;
+    font-size: 30px;
 }
 
 .page-img {
@@ -34,7 +35,7 @@
     border: 4px solid white;
     padding:15px;
     font-weight: 500;
-    /* left:47%; */
+ 
 }
 
 
@@ -46,20 +47,72 @@
     margin-top: 8px;
 }
 
+.experiences {
+    overflow: hidden;
+    margin:0 12px 35px;
+}
 
+.overlay {
+    opacity: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
 
-/* .header {
-    position:relative;
-    background-position:center;
-    background-image: url("https://media.nomadicmatt.com/seasiaguide.jpg");
-    background-repeat: no-repeat;
-    background-attachment:fixed;
+.pic-btn {
+    /* transition: .5s ease; */
+  opacity: 1;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.overlay:hover {
+    opacity: 0.7;
+}
+
+.overlay:hover .pic-btn {
+    opacity: 1;
+}
+
+.text {
+  color: white;
+  background-color:rgba(	236, 236, 236, 0.8);
+  border:5px solid white;
+  padding: 16px 32px;
+  font-size:25px;
+}
+
+#box1 {
+    background-image: url("./images/accom.jpg");
+    background-position: bottom;
+    background-size: cover;
+    height:45vh;
+    border: 8px solid white;
+    padding:0;
+}
+
+#box2 {
+    background-image: url("./images/friends-eating.jpg");
     background-size:cover;
     height:45vh;
-    position: relative;
-} */
+    border: 8px solid white;
+    padding:0;
+}
 
-
+#box3 {
+    background-image: url("./images/activity.jpg");
+    background-size: cover;
+    background-position: center;
+    height:45vh;
+    border: 8px solid white;
+    padding:0;
+}
 
 .header-text {
     /* position: absolute; */
@@ -85,13 +138,23 @@
     .page-title {
         display:flex;
         justify-content: center;
-        font-size:22px;
+        font-size:25px;
     }
     .home-title {
         left:34%;
         top:25%;
         font-size:22px;
     }
+    #box1{
+        margin:5px 12px;
+    }
+    #box2{
+        margin:5px 12px;
+    }
+    #box3{
+        margin:5px 12px;
+    }
+    
 }
 
 @media screen and (min-width:427px) {
@@ -110,8 +173,18 @@
         left:47%;
         top:30%;
     }
-    
+    #box2{
+        padding:0 5px;
+        background-position: center;
+    }
 }
+
+@media screen and (max-width:769px){
+    .text {
+        font-size:20px;
+    }
+}
+
 
 
 

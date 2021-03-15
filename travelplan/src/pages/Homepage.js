@@ -1,8 +1,8 @@
 import React from 'react'
-import { Container, Row, Col, Button } from 'reactstrap'
+import { Container, Row, Col } from 'reactstrap'
 import {
     Card, CardImg, CardText, CardBody,
-    CardTitle, CardSubtitle, Badge
+    CardTitle, Badge
 } from 'reactstrap';
 import { Link } from 'react-router-dom'
 import axios from 'axios'
@@ -62,17 +62,34 @@ export default class Homepage extends React.Component {
                             </Row>
                         </div>
                     </div>
-
-                    <div className="home-section">
-                        <div className="title-header">
-                            <h3 className="page-title">Places & Experiences</h3>
-                        </div>
-                        <div >
-
-                        </div>
-                        
+                    <div className="title-header">
+                        <h3 className="page-title">Places & Experiences</h3>
                     </div>
                 </Container>
+
+                <div className="home-section">
+                    <div className="experiences">
+                        <Row>
+                            <Col md="4" lg="4" id="box1" className="overlay">
+                                <Link to="/accommodation"><div className="pic-btn">
+                                    <div className="text">Accommodation</div>
+                                </div></Link>
+                            </Col>
+                            <Col md="4" lg="4" id="box2" className="overlay">
+                                <Link to="/restaurnt"><div className="pic-btn">
+                                    <div className="text">Restaurant</div>
+                                </div></Link>
+                            </Col>
+                            <Col md="4" lg="4" id="box3" className="overlay">
+                                <Link to="/activity"><div className="pic-btn">
+                                    <div className="text">Activities</div>
+                                </div></Link>
+                            </Col>
+                        </Row>
+                    </div>
+
+                </div>
+
 
             </React.Fragment>
         )
