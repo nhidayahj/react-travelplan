@@ -76,7 +76,7 @@ export default class Homepage extends React.Component {
                                 </div></Link>
                             </Col>
                             <Col md="4" lg="4" id="box2" className="overlay">
-                                <Link to="/restaurnt"><div className="pic-btn">
+                                <Link to="/restaurant"><div className="pic-btn">
                                     <div className="text">Restaurant</div>
                                 </div></Link>
                             </Col>

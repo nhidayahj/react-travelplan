@@ -147,9 +147,9 @@ export default class CreateReview extends React.Component {
 
                         <input type="checkbox"
                             name="tags"
-                            value="wifi"
+                            value="free-wifi"
                             onChange={this.tagList}
-                            checked={this.state.tags.includes("wifi")} />Free Wifi
+                            checked={this.state.tags.includes("free-wifi")} />Free Wifi
 
                         <input type="checkbox"
                             name="tags"
@@ -159,9 +159,9 @@ export default class CreateReview extends React.Component {
 
                         <input type="checkbox"
                             name="tags"
-                            value="activity-deals"
+                            value="deals"
                             onChange={this.tagList}
-                            checked={this.state.tags.includes("activity-deals")} /> Deals/Packages
+                            checked={this.state.tags.includes("deals")} /> Deals/Packages
 
                         <input type="checkbox"
                             name="tags"
@@ -192,7 +192,7 @@ export default class CreateReview extends React.Component {
                     <div>
                         <h4>Ratings</h4>
                         <input type="radio" name="ratings" value="poor" checked={this.state.ratings == "poor"} onChange={this.userFill} />Poor
-                       <input type="radio" name="ratings" value="good" checked={this.state.ratings == "good"} onChange={this.userFill} />Good
+                       <input type="radio" name="ratings" value="satisfactory" checked={this.state.ratings == "satisfactory"} onChange={this.userFill} />Satisfactory
                        <input type="radio" name="ratings" value="excellent" checked={this.state.ratings == "excellent"} onChange={this.userFill} />Excellent
 
                    </div>

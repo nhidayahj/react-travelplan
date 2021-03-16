@@ -13,6 +13,8 @@ import Japan from './pages/Japan';
 import Korea from './pages/Korea';
 import Taiwan from './pages/Taiwan';
 import Thailand from './pages/Thailand';
+import ShowReview from './pages/ShowReview';
+import CreateReview from './pages/CreateReview';
 
 
 function App() {
@@ -37,6 +39,12 @@ function App() {
                 </Route>
                 <Route exact path="/thailand">
                     <Thailand />
+                </Route>
+                <Route exact path="/edit" component={ShowReview}>
+                    
+                </Route>
+                <Route exact path="/create" component={CreateReview}>
+                    
                 </Route>
             </Switch>
         </Router>

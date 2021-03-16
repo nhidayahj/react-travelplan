@@ -4,28 +4,26 @@
 
 
 .page-title {
-    margin-top:12px;
+    display:flex;
+    justify-content: center;
+    margin-top:20px;
+    padding:10px;
     font-family: 'Poppins', sans-serif;
-    font-size:30px;
+    font-size:35px;
 }
 
 .title-header {
     padding:15px;
 }
 
-.country {
-    display:flex;
-    justify-content: center;
-    font-family: 'Poppins', sans-serif;
-    font-size: 30px;
-}
 
 .page-img {
     margin-top:10px;
     height:50vh;
-    background-color: cornflowerblue;
+    background-color: white;
     background-image: url("https://www.forestway.org/wp-content/uploads/2020/06/solo_travel_germany.jpeg");
     background-position: center;
+    background-repeat: no-repeat;
     position:relative
 }
 
@@ -114,6 +112,42 @@
     padding:0;
 }
 
+#page-img-aus {
+    margin-top: 12px;
+    background-image: url("https://i.pinimg.com/736x/0f/2a/97/0f2a977945478d0905cdf03e9b0bbd82.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    /* width:100%; */
+    /* height:100%; */
+    height: 35vh;
+    background-color: orange;
+    
+}
+
+.country-name {
+    margin-top: 20px;
+    padding:20px;
+    display:flex;
+    justify-content: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 40px;
+}
+
+
+/* .country {
+    
+    display:flex;
+    justify-content: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 35px;
+} */
+
+
+.filter-section {
+    margin-top:12px;
+}
+
 .header-text {
     /* position: absolute; */
     left:50px;
@@ -121,9 +155,18 @@
 
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.review-form-btns {
+    display: flex;
+    justify-content: center;
+}
+
+#update{
+    margin-right: 10px;
+}
+
+.review-body {
+    margin-top: 35px;
+    margin-bottom: 35px;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -138,7 +181,7 @@
     .page-title {
         display:flex;
         justify-content: center;
-        font-size:25px;
+        font-size:28px;
     }
     .home-title {
         left:34%;

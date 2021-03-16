@@ -1,5 +1,11 @@
-import React from 'react'
-import axios from 'axios'
+import React from 'react';
+import axios from 'axios';
+import {
+    Container,
+    Card, CardImg, CardText, CardBody,
+    CardTitle, CardSubtitle, Button
+} from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 const baseUrl = "https://3001-tan-dog-b6spunp9.ws-us03.gitpod.io/japan"
 
@@ -28,14 +34,14 @@ export default class Japan extends React.Component {
     renderReview() {
         let jap_accum = [];
         for (let i of this.state.jap_reviews) {
+            let obj = {review_id:i._id, country_id:i.country};
             jap_accum.push(
                 <div key={i._id}>
                     <p>City: {i.city_town}</p>
                     <p>Category: {i.review_category}</p>
                     <p>Review Description: {i.review_desc}</p>
                     <p>Reviewed by: {i.username}</p>
-                    <button>Update</button>
-                    <button>Delete</button>
+                    <Link to={{pathname:"/edit", state:obj}}><Button outline color="primary" size="sm">Edit</Button></Link>
                 </div>
             )
         }
