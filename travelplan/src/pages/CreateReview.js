@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import { Container, Row, Col, Form, FormGroup, Label, Input, Button } from 'reactstrap';
 
 const baseUrl = "https://3001-tan-dog-b6spunp9.ws-us03.gitpod.io"
 
@@ -56,15 +57,10 @@ export default class CreateReview extends React.Component {
 
 
     submitReview = async () => {
-        // let category_id = await axios.post(baseUrl + '/category/review', {
-        //     review_category:this.state.reviewCategory
-        // })
-        // // console.log(category_id.data._id)
-        // console.log(category_id.data.insertedId)
-    
         let all_review = await axios.post(baseUrl + '/createreviews', {
-            username: this.state.username,
-            usercode: this.state.usercode,
+            user:this.state.username,
+            username:this.state.username,
+            usercode:this.state.usercode,
             countryName : this.state.country.toLowerCase(),
             cityTown: this.state.city,
             reviewCategory:this.state.reviewCategory,
@@ -85,8 +81,6 @@ export default class CreateReview extends React.Component {
         return (
             <React.Fragment>
                 <h2>Review a place you've visited</h2>
-
-
                 <div>
                     <label>Country: </label>
                     <select name="country" value={this.state.country} onChange={this.userFill}>
@@ -372,9 +366,9 @@ export default class CreateReview extends React.Component {
                     {/* Ratings */}
                     <div>
                         <h4>Ratings</h4>
-                        <input type="radio" name="ratings" value="poor" checked={this.state.ratings == "poor"} onChange={this.userFill} />Poor
-                       <input type="radio" name="ratings" value="good" checked={this.state.ratings == "satisfactory"} onChange={this.userFill} />Satisfactory
-                       <input type="radio" name="ratings" value="excellent" checked={this.state.ratings == "excellent"} onChange={this.userFill} />Excellent
+                        <input type="radio" name="ratings" value="poor" checked={this.state.ratings === "poor"} onChange={this.userFill} />Poor
+                       <input type="radio" name="ratings" value="satisfactory" checked={this.state.ratings === "satisfactory"} onChange={this.userFill} />Satisfactory
+                       <input type="radio" name="ratings" value="excellent" checked={this.state.ratings === "excellent"} onChange={this.userFill} />Excellent
 
                    </div>
 
@@ -382,6 +376,8 @@ export default class CreateReview extends React.Component {
                     <div>
                         <label>Username: </label>
                         <input type="text" name="username" value={this.state.username} onChange={this.userFill} />
+                    </div>
+                    <div style={{display:"none"}}>
                         <label>User code: {this.state.usercode} </label>
                     </div>
 

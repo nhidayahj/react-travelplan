@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {
     Container,
     Card, CardImg, CardText, CardBody,
-    CardTitle, CardSubtitle, Button, 
+    CardTitle, CardSubtitle, Button,
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
@@ -14,6 +14,7 @@ export default class Australia extends React.Component {
     state = {
         aus_reviews: [],
         country: [],
+        all_users: [],
         filter_btn: this.props.filter_search,
 
     }
@@ -22,7 +23,8 @@ export default class Australia extends React.Component {
         let response = await axios.get(baseUrl)
         this.setState({
             aus_reviews: response.data[0],
-            country: response.data[1]
+            country: response.data[1],
+            all_users: response.data[2]
         })
     }
 
@@ -53,8 +55,6 @@ export default class Australia extends React.Component {
                         </div>
                     </Container> */}
                 </div>
-
-
             </div>
         )
 
@@ -77,25 +77,47 @@ export default class Australia extends React.Component {
     // }
 
     renderAllReview() {
-
         let aus_accum = [];
-        for (let i of this.state.aus_reviews) {
-            let obj = { review_id: i._id, country_id: i.country };
-            aus_accum.push(
-                <div key={i._id}>
-                    <Card>
-                        <CardImg top width="25%" height="50%" src={i.image_link} alt="Card image cap" />
-                        <CardBody>
-                            <CardTitle tag="h5">City: {i.city_town}</CardTitle>
-                            <CardTitle tag="h5">Category: {i.review_category}</CardTitle>
-                            <CardSubtitle tag="h6" className="mb-2 text-muted">Reviewed by: {i.username}</CardSubtitle>
-                            <CardText>{i.review_desc}</CardText>
-                            <Link to={{ pathname: "/edit", state: obj }}><Button outline color="primary" size="sm">Edit</Button></Link>
-                        </CardBody>
-                    </Card>
-                </div>
-            )
+        for (let user of this.state.all_users) {
+            for (let user_review of this.state.aus_reviews) {
+                let obj = { review_id: user_review._id, country_id: user_review.country };
+                if (user_review.user === user._id) {
+                    aus_accum.push(
+                        <div key={user_review._id}>
+                            <Card>
+                                <CardImg top width="25%" height="50%" src={user_review.image_link} alt="Card image cap" />
+                                <CardBody>
+                                    <CardTitle tag="h5">City: {user_review.city_town}</CardTitle>
+                                    <CardTitle tag="h5">Category: {user_review.review_category}</CardTitle>
+                                    <CardSubtitle tag="h6" className="mb-2 text-muted">Reviewed by: {user.username}</CardSubtitle>
+                                    <CardText>{user_review.review_desc}</CardText>
+                                    <Link to={{ pathname: "/edit", state: obj }}><Button outline color="primary" size="sm">Edit</Button></Link>
+                                </CardBody>
+                            </Card>
+                        </div>
+                    )
+                }
+            }
         }
+        // let aus_accum = [];
+        // for (let i of this.state.aus_reviews) {
+        //     let obj = { review_id: i._id, country_id: i.country };
+
+        //     aus_accum.push(
+        //         <div key={i._id}>
+        //             <Card>
+        //                 <CardImg top width="25%" height="50%" src={i.image_link} alt="Card image cap" />
+        //                 <CardBody>
+        //                     <CardTitle tag="h5">City: {i.city_town}</CardTitle>
+        //                     <CardTitle tag="h5">Category: {i.review_category}</CardTitle>
+        //                     <CardSubtitle tag="h6" className="mb-2 text-muted">Reviewed by: {i.username}</CardSubtitle>
+        //                     <CardText>{i.review_desc}</CardText>
+        //                     <Link to={{ pathname: "/edit", state: obj }}><Button outline color="primary" size="sm">Edit</Button></Link>
+        //                 </CardBody>
+        //             </Card>
+        //         </div>
+        //     )
+        // }
         return aus_accum;
     }
 
@@ -105,7 +127,6 @@ export default class Australia extends React.Component {
         })
     }
 
-    filterS
 
 
 
@@ -126,11 +147,9 @@ export default class Australia extends React.Component {
             }
         }
         return filter_accum;
-
     }
 
     render() {
-
         return (
             <React.Fragment>
                 {this.renderCountryInfo()}
