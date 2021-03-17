@@ -2,10 +2,6 @@ import './App.css';
 import React from 'react'
 import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
-
-
-// import ShowReviews from './pages/ShowReviews'
-// import CreateReview from './pages/CreateReview'
 import HomeNavBar from './HomeNavBar'
 import Homepage from './pages/Homepage';
 import Australia from './pages/Australia';
@@ -43,8 +39,8 @@ function App() {
                 <Route exact path="/edit" component={ShowReview}>
                     
                 </Route>
-                <Route exact path="/create" component={CreateReview}>
-                    
+                <Route exact path="/create">
+                    <CreateReview/>
                 </Route>
             </Switch>
         </Router>

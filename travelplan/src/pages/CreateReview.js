@@ -65,7 +65,7 @@ export default class CreateReview extends React.Component {
         let all_review = await axios.post(baseUrl + '/createreviews', {
             username: this.state.username,
             usercode: this.state.usercode,
-            countryName : this.state.country,
+            countryName : this.state.country.toLowerCase(),
             cityTown: this.state.city,
             reviewCategory:this.state.reviewCategory,
             reviewType: this.state.review_cat_type,

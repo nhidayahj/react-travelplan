@@ -19,7 +19,7 @@ export default class ShowReview extends React.Component {
         reviewDesc: "",
         image: "",
         ratings: "",
-        tags: []
+        tags: [],
     }
 
     async componentDidMount() {
@@ -45,26 +45,10 @@ export default class ShowReview extends React.Component {
     }
 
 
-    // renderReview = () => {
-    //     let accum = [];
-    //     for (let review of this.state.all_reviews) {
-    //         if (review._id === this.state.review_id) {
-    //             accum.push(
-    //                 <div key="review._id">
-    //                     <h3>{review.review_category}</h3>
-    //                     <p>Review Description: {review.review_desc}</p>
-    //                     <p>Ratings: {review.ratings}</p>
-    //                     <p>Reviewed by: {review.username}</p>
-
-    //                 </div>)
-    //         }
-    //     }
-    //     return accum;
-    // }
-
-    updateForm = e => {
+    updateForm = (e) => {
         this.setState({
-            [e.target.name]: e.target.value
+            [e.target.name]:e.target.value
+
         })
     }
 
@@ -83,12 +67,11 @@ export default class ShowReview extends React.Component {
         })
     }
 
-    submitUpdate = () => {
-        
+    submitUpdate = async () => {
         let updatedObj = {
             cityTown: this.state.city,
-            reviewCategory:this.state.reviewCategory,
-            reviewType: this.state.review_cat_type,
+            reviewCategory: this.state.reviewCategory,
+            reviewType: this.state.reviewType,
             nameOfPlace: this.state.nameOfPlace,
             reviewAddress: this.state.address,
             reviewTags: this.state.tags,
@@ -96,8 +79,14 @@ export default class ShowReview extends React.Component {
             imageLink: this.state.image,
             ratings: this.state.ratings,
         }
-        let updateNewReview = axios.put(`https://3001-tan-dog-b6spunp9.ws-us03.gitpod.io/review/${this.state.edit_review[0]._id}/update`, {updatedObj})
-
+        console.log("new bject: " , updatedObj)
+        let updateNewReview = await axios.put(`https://3001-tan-dog-b6spunp9.ws-us03.gitpod.io/review/${this.state.edit_review[0]._id}/update`, updatedObj)
+        console.log("New updated data:", updateNewReview.data);
+        // if (Response.data.status == 200 ){
+        //     //redirect to specific page
+        // } else {
+        //     //error to show? 
+        // }
     }
 
     render() {
@@ -108,31 +97,31 @@ export default class ShowReview extends React.Component {
                 <Container className="review-body">
                     <h2 className="page-title">Edit Review</h2>
                     <Form>
-                        {this.state.edit_review.map(m => (
-                            <React.Fragment>
-                                <Row>
-                                    <Col sm="4" md="6">
-                                        <FormGroup>
-                                            <legend>Country</legend>
-                                            <Input type="select" name="country" value={this.state.country} onChange={this.updateForm}>
-                                                <option value="Australia">Australia</option>
-                                                <option value="Japan">Japan</option>
-                                                <option value="Korea">Korea</option>
-                                                <option value="Taiwan">Taiwan</option>
-                                                <option value="Thailand">Thailand</option>
-                                            </Input>
-                                        </FormGroup>
-                                    </Col>
-                                    <Col sm="4" md="6">
-                                        <FormGroup>
-                                            <legend>City / Town</legend>
-                                            <Input type="text" name="city" value={this.state.city} onChange={this.updateForm} placeholder="City" />
-                                        </FormGroup>
-                                    </Col>
-                                </Row>
 
-                            </React.Fragment>
-                        ))}
+                        <React.Fragment>
+                            <Row>
+                                <Col sm="4" md="6">
+                                    <FormGroup>
+                                        <legend>Country</legend>
+                                        <Input type="select" name="country" value={this.state.country} onChange={this.updateForm}>
+                                            <option value="Australia">Australia</option>
+                                            <option value="Japan">Japan</option>
+                                            <option value="Korea">Korea</option>
+                                            <option value="Taiwan">Taiwan</option>
+                                            <option value="Thailand">Thailand</option>
+                                        </Input>
+                                    </FormGroup>
+                                </Col>
+                                <Col sm="4" md="6">
+                                    <FormGroup>
+                                        <legend>City / Town</legend>
+                                        <Input type="text" name="city" value={this.state.city} onChange={this.updateForm} placeholder="City" />
+                                    </FormGroup>
+                                </Col>
+                            </Row>
+
+                        </React.Fragment>
+                        
                         <Row>
                             <Col>
                                 <FormGroup>
@@ -149,12 +138,12 @@ export default class ShowReview extends React.Component {
                             <FormGroup tag="fieldset">
                                 <legend>Accommodation Type</legend>
                                 <FormGroup check>
-                                    <Input type="radio" id="radio1-option1" name="reviewType"
+                                    <Input type="radio" name="reviewType"
                                         value="hotel" onChange={this.updateForm} checked={this.state.reviewType === "hotel"} />
                                     <Label>Hotel</Label>
                                 </FormGroup>
                                 <FormGroup check>
-                                    <Input type="radio" name="reviewType" id="radio1-option2"
+                                    <Input type="radio" name="reviewType"
                                         value="airbnb" onChange={this.updateForm} checked={this.state.reviewType === "airbnb"} />
                                     <Label>Airbnb</Label>
 
@@ -278,7 +267,7 @@ export default class ShowReview extends React.Component {
                                     </FormGroup>
                                 </Col>
                             </Row>
-                
+
                             <div className="review-form-btns">
                                 <Button id="update" color="info" onClick={this.submitUpdate}>Update</Button>{' '}
                                 <Button color="danger">Delete</Button>
