@@ -4,12 +4,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {
     Container,
     Card, CardImg, CardText, CardBody,
-    CardTitle, CardSubtitle, Button
+    CardTitle, CardSubtitle, Button, 
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import Filters from '../Filters';
-
-
 
 const baseUrl = "https://3001-tan-dog-b6spunp9.ws-us03.gitpod.io/australia"
 
@@ -80,19 +77,20 @@ export default class Australia extends React.Component {
     // }
 
     renderAllReview() {
-        
+
         let aus_accum = [];
         for (let i of this.state.aus_reviews) {
-            let obj = {review_id:i._id, country_id:i.country};
+            let obj = { review_id: i._id, country_id: i.country };
             aus_accum.push(
                 <div key={i._id}>
                     <Card>
-                        <CardImg top width="25%" height="50%" src="https://images.squarespace-cdn.com/content/v1/55ee34aae4b0bf70212ada4c/1577545161018-1F9Z9ZZQG9JO2O4WCWQX/ke17ZwdGBToddI8pDm48kLkXF2pIyv_F2eUT9F60jBl7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0iyqMbMesKd95J-X4EagrgU9L3Sa3U8cogeb0tjXbfawd0urKshkc5MgdBeJmALQKw/keith-zhu-qaNcz43MeY8-unsplash+%281%29.jpg?format=1500w" alt="Card image cap" />
+                        <CardImg top width="25%" height="50%" src={i.image_link} alt="Card image cap" />
                         <CardBody>
                             <CardTitle tag="h5">City: {i.city_town}</CardTitle>
+                            <CardTitle tag="h5">Category: {i.review_category}</CardTitle>
                             <CardSubtitle tag="h6" className="mb-2 text-muted">Reviewed by: {i.username}</CardSubtitle>
                             <CardText>{i.review_desc}</CardText>
-                            <Link to={{pathname: "/edit", state: obj}}><Button outline color="primary" size="sm">Edit</Button></Link>
+                            <Link to={{ pathname: "/edit", state: obj }}><Button outline color="primary" size="sm">Edit</Button></Link>
                         </CardBody>
                     </Card>
                 </div>
@@ -105,8 +103,11 @@ export default class Australia extends React.Component {
         this.setState({
             filter_btn: e.target.value
         })
-
     }
+
+    filterS
+
+
 
     filterDisplay() {
         let filter_accum = [];
@@ -129,13 +130,18 @@ export default class Australia extends React.Component {
     }
 
     render() {
-        
+
         return (
             <React.Fragment>
                 {this.renderCountryInfo()}
 
                 <div className="filter-section">
-                    <Filters filter_search="" />
+                    <ul>
+                        <li class="active" href="/">Home</li>
+                        <li href="/">Accommodation</li>
+                        <li href="/">Restaurant</li>
+                        <li href="/">Activities</li>
+                    </ul>
                 </div>
 
 
@@ -143,9 +149,9 @@ export default class Australia extends React.Component {
                     <button name="filter_btn" value="home" onClick={this.filterBtn}>Home</button>
                     <button name="filter_btn" value="Accommodation" onClick={this.filterBtn}>Accommodation</button>
                     <button name="filter_btn" value="Restaurant" onClick={this.filterBtn}>Restaurant</button>
-                    <button name="filter_btn" value="activities" onClick={this.filterBtn}>Travel Activities</button>
+                    <button name="filter_btn" value="Activities" onClick={this.filterBtn}>Travel Activities</button>
                 </div>
-                <div style={{ display: this.state.filter_btn === "home" || this.state.filter_btn === "" ? 'block' : 'none' }}>
+                <div style={{ display: this.state.filter_btn === "home" || this.state.filter_btn === undefined ? 'block' : 'none' }}>
                     <h3>Reviews</h3>
                     {this.renderAllReview()}
                 </div>

@@ -160,13 +160,50 @@
     justify-content: center;
 }
 
-#update{
+.update{
     margin-right: 10px;
 }
 
 .review-body {
     margin-top: 35px;
     margin-bottom: 35px;
+}
+
+.filter-section {
+    width: 100%;
+    background-color:rgb(255, 255, 255);
+    overflow: auto;
+    margin: 22px 0 22px;
+}
+
+li {
+    font-family: 'Poppins', sans-serif;
+}
+
+ul {
+    margin:0;
+    padding:0;
+    list-style-type: none;
+}
+
+.filter-section li {
+  float: left;
+  padding: 12px;
+  color: rgb(29, 25, 241);
+  text-decoration: none;
+  font-size: 17px;
+  width: 25%;
+  text-align: center; 
+}
+
+/* Add a background color on mouse-over */
+.filter-section li:hover {
+  background-color: rgba(171, 223, 75, 0.966);
+}
+
+/* Style the current/active link */
+.filter-section li.active {
+  background-color: rgb(71, 218, 238);
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -197,12 +234,20 @@
     #box3{
         margin:5px 12px;
     }
-    
 }
 
 @media screen and (min-width:427px) {
     .home-title {
         left:50%
+    }
+}
+
+@media screen and (max-width:600px) {
+    .filter-section li {
+         float: none;
+    display: block;
+    width: 100%;
+    text-align: left;
     }
 }
 
@@ -220,7 +265,12 @@
         padding:0 5px;
         background-position: center;
     }
+    .filter-section li{
+        font-size:20px;
+    }
 }
+
+
 
 @media screen and (max-width:769px){
     .text {

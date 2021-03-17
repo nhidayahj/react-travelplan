@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { Container, Row, Col, Form, FormGroup, Label, Input, Button } from 'reactstrap';
-import CreateReview from './CreateReview';
+
 
 const baseUrl = "https://3001-tan-dog-b6spunp9.ws-us03.gitpod.io/";
 
@@ -91,13 +91,12 @@ export default class ShowReview extends React.Component {
 
     deletePost = async () => {
         let confirmDelete = await axios.post(`https://3001-tan-dog-b6spunp9.ws-us03.gitpod.io/review/${this.state.edit_review[0]._id}/delete`)
-        console.log("Items deleted")
+        console.log("Items deleted ", confirmDelete)
     }
 
     render() {
         return (
             <React.Fragment>
-                <CreateReview />
                 <Container className="review-body">
                     <h2 className="page-title">Edit Review</h2>
                     <Form>
@@ -139,6 +138,7 @@ export default class ShowReview extends React.Component {
                             </Col>
                         </Row>
                         <div style={{ display: this.state.reviewCategory === "Accommodation" ? "block" : 'none' }}>
+
                             <FormGroup tag="fieldset">
                                 <legend>Accommodation Type</legend>
                                 <FormGroup check>
@@ -281,7 +281,7 @@ export default class ShowReview extends React.Component {
 
                         <div style={{ display: this.state.reviewCategory === "Restaurant" ? "block" : 'none' }}>
                             <FormGroup tag="fieldset">
-                                <legend>Accommodation Type</legend>
+                                <legend>Restaurant Mood</legend>
                                 <FormGroup check>
                                     <Input type="radio" name="reviewType"
                                         value="fine-dining" onChange={this.updateForm} checked={this.state.reviewType === "fine-dining"} />
@@ -378,58 +378,240 @@ export default class ShowReview extends React.Component {
                                 </Col>
                             </Row>
 
+
+                            <Row>
+                                <Col md="6">
+                                    <FormGroup>
+                                        <legend>Review Description</legend>
+                                        <Input type="textarea" name="reviewDesc" value={this.state.reviewDesc} onChange={this.updateForm} />
+                                    </FormGroup>
+                                </Col>
+                                <Col md="6">
+
+                                    <FormGroup tag="fieldset">
+                                        <legend>Ratings</legend>
+                                        <FormGroup check>
+                                            <Input type="radio" name="ratings"
+                                                value="poor" onChange={this.updateForm} checked={this.state.ratings === "poor"} />
+                                            <Label>Poor</Label>
+                                        </FormGroup>
+                                        <FormGroup check>
+                                            <Input type="radio" name="ratings"
+                                                value="satisfactory" onChange={this.updateForm} checked={this.state.ratings === "satisfactory"} />
+                                            <Label>Satisfactory</Label>
+
+                                        </FormGroup>
+                                        <FormGroup check>
+                                            <Input type="radio" name="ratings"
+                                                value="excellent" onChange={this.updateForm} checked={this.state.ratings === "excellent"} />
+                                            <Label>Excellent</Label>
+                                        </FormGroup>
+                                    </FormGroup>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col>
+                                    <FormGroup>
+                                        <legend>Image Url</legend>
+                                        <Input
+                                            type="url"
+                                            name="image"
+                                            value={this.state.image}
+                                            onChange={this.updateForm}
+                                        />
+                                    </FormGroup>
+                                </Col>
+                            </Row>
+
+                            <div className="review-form-btns">
+                                <Button className="update" color="info" onClick={this.submitUpdate}>Update</Button>{' '}
+                                <Button color="danger" onClick={this.deletePost}>Delete</Button>
+                            </div>
+                        </div>
+                        {/* End of Restaurant form */}
+
+                        <div style={{ display: this.state.reviewCategory === "Activities" ? "block" : "none" }}>
+                            <FormGroup tag="fieldset">
+                                <legend>Travel Activities</legend>
+                                <FormGroup check>
+                                    <Input type="radio" name="reviewType"
+                                        value="outdoor" onChange={this.updateForm} checked={this.state.reviewType === "outdoor"} />
+                                    <Label>Outdoor Activities</Label>
+                                </FormGroup>
+                                <FormGroup check>
+                                    <Input type="radio" name="reviewType"
+                                        value="cultural" onChange={this.updateForm} checked={this.state.reviewType === "cultural"} />
+                                    <Label>Cultural Workshop</Label>
+
+                                </FormGroup>
+                                <FormGroup check>
+                                    <Input type="radio" name="reviewType"
+                                        value="arts" onChange={this.updateForm} checked={this.state.reviewType === "arts"} />
+                                    <Label>Arts & Crafts</Label>
+                                </FormGroup>
+                            </FormGroup>
                             
-                        <Row>
-                            <Col md="6">
-                                <FormGroup>
-                                    <legend>Review Description</legend>
-                                    <Input type="textarea" name="reviewDesc" value={this.state.reviewDesc} onChange={this.updateForm} />
-                                </FormGroup>
-                            </Col>
-                            <Col md="6">
-
-                                <FormGroup tag="fieldset">
-                                    <legend>Ratings</legend>
-                                    <FormGroup check>
-                                        <Input type="radio" name="ratings"
-                                            value="poor" onChange={this.updateForm} checked={this.state.ratings === "poor"} />
-                                        <Label>Poor</Label>
+                            <div style={{ display: this.state.reviewType === "outdoor" ? "block" : 'none'}}>
+                                <Row>
+                                    <Col>
+                                        <legend>Outdoor Adventure</legend>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                <Col sm="4">
+                                    <FormGroup check inline>
+                                        <Input type="checkbox" name="tags" value="camping" onChange={this.tagList}
+                                            checked={this.state.tags.includes("camping")} />
+                                        <Label check>Camping</Label>
                                     </FormGroup>
-                                    <FormGroup check>
-                                        <Input type="radio" name="ratings"
-                                            value="satisfactory" onChange={this.updateForm} checked={this.state.ratings === "satisfactory"} />
-                                        <Label>Satisfactory</Label>
-
+                                </Col>
+                                <Col sm="4">
+                                    <FormGroup check inline>
+                                        <Input type="checkbox" name="tags" value="hiking" onChange={this.tagList}
+                                            checked={this.state.tags.includes("hiking")} />
+                                        <Label check>Hiking</Label>
                                     </FormGroup>
-                                    <FormGroup check>
-                                        <Input type="radio" name="ratings"
-                                            value="excellent" onChange={this.updateForm} checked={this.state.ratings === "excellent"} />
-                                        <Label>Excellent</Label>
+                                </Col>
+                                <Col sm="4">
+                                    <FormGroup check inline>
+                                        <Input type="checkbox" name="tags" value="sky-diving" onChange={this.tagList}
+                                            checked={this.state.tags.includes("sky-diving")} />
+                                        <Label check>Sky-Diving</Label>
                                     </FormGroup>
-                                </FormGroup>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <FormGroup>
-                                    <legend>Image Url</legend>
-                                    <Input
-                                        type="url"
-                                        name="image"
-                                        value={this.state.image}
-                                        onChange={this.updateForm}
-                                    />
-                                </FormGroup>
-                            </Col>
-                        </Row>
+                                </Col>
+                            </Row>
+                            </div>
+                            <div style={{ display: this.state.reviewType === "cultural" ? "block" : 'none'}}>
+                                <Row>
+                                    <Col>
+                                        <legend>Cultural Immersion</legend>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                <Col sm="4">
+                                    <FormGroup check inline>
+                                        <Input type="checkbox" name="tags" value="ethnic" onChange={this.tagList}
+                                            checked={this.state.tags.includes("ethnic")} />
+                                        <Label check>Cultural Exchange</Label>
+                                    </FormGroup>
+                                </Col>
+                                <Col sm="4">
+                                    <FormGroup check inline>
+                                        <Input type="checkbox" name="tags" value="cooking" onChange={this.tagList}
+                                            checked={this.state.tags.includes("cooking")} />
+                                        <Label check>Local Cooking Class</Label>
+                                    </FormGroup>
+                                </Col>
+                                <Col sm="4">
+                                    <FormGroup check inline>
+                                        <Input type="checkbox" name="tags" value="sport" onChange={this.tagList}
+                                            checked={this.state.tags.includes("sport")} />
+                                        <Label check>Local Sport Activity</Label>
+                                    </FormGroup>
+                                </Col>
+                            </Row>
+                            </div>
+                            <div style={{ display: this.state.reviewType === "arts" ? "block" : 'none'}}>
+                                <Row>
+                                    <Col>
+                                        <legend>Arts & Crafts</legend>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                <Col sm="4">
+                                    <FormGroup check inline>
+                                        <Input type="checkbox" name="tags" value="pottery" onChange={this.tagList}
+                                            checked={this.state.tags.includes("pottery")} />
+                                        <Label check>Pottery Making</Label>
+                                    </FormGroup>
+                                </Col>
+                                <Col sm="4">
+                                    <FormGroup check inline>
+                                        <Input type="checkbox" name="tags" value="kite" onChange={this.tagList}
+                                            checked={this.state.tags.includes("kite")} />
+                                        <Label check>Kite Making</Label>
+                                    </FormGroup>
+                                </Col>
+                                <Col sm="4">
+                                    <FormGroup check inline>
+                                        <Input type="checkbox" name="tags" value="painting" onChange={this.tagList}
+                                            checked={this.state.tags.includes("painting")} />
+                                        <Label check>Cultural Painting</Label>
+                                    </FormGroup>
+                                </Col>
+                            </Row>
+                            </div>
+                            <Row>
+                                <Col>
+                                    <legend>Activity Details</legend>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col sm="4" md="6">
+                                    <FormGroup>
+                                        <Label>Activity Package</Label>
+                                        <Input type="text" name="nameOfPlace"
+                                            value={this.state.nameOfPlace} onChange={this.updateForm} />
+                                    </FormGroup>
+                                </Col>
+                                <Col sm="4" md="6">
+                                    <FormGroup>
+                                        <Label>Location</Label>
+                                        <Input type="text" name="address"
+                                            value={this.state.address} onChange={this.updateForm} />
+                                    </FormGroup>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col md="6">
+                                    <FormGroup>
+                                        <legend>Review Description</legend>
+                                        <Input type="textarea" name="reviewDesc" value={this.state.reviewDesc} onChange={this.updateForm} />
+                                    </FormGroup>
+                                </Col>
+                                <Col md="6">
 
-                        <div className="review-form-btns">
-                            <Button className="update" color="info" onClick={this.submitUpdate}>Update</Button>{' '}
-                            <Button color="danger" onClick={this.deletePost}>Delete</Button>
+                                    <FormGroup tag="fieldset">
+                                        <legend>Ratings</legend>
+                                        <FormGroup check>
+                                            <Input type="radio" name="ratings"
+                                                value="poor" onChange={this.updateForm} checked={this.state.ratings === "poor"} />
+                                            <Label>Poor</Label>
+                                        </FormGroup>
+                                        <FormGroup check>
+                                            <Input type="radio" name="ratings"
+                                                value="satisfactory" onChange={this.updateForm} checked={this.state.ratings === "satisfactory"} />
+                                            <Label>Satisfactory</Label>
+
+                                        </FormGroup>
+                                        <FormGroup check>
+                                            <Input type="radio" name="ratings"
+                                                value="excellent" onChange={this.updateForm} checked={this.state.ratings === "excellent"} />
+                                            <Label>Excellent</Label>
+                                        </FormGroup>
+                                    </FormGroup>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col>
+                                    <FormGroup>
+                                        <legend>Image Url</legend>
+                                        <Input
+                                            type="url"
+                                            name="image"
+                                            value={this.state.image}
+                                            onChange={this.updateForm}
+                                        />
+                                    </FormGroup>
+                                </Col>
+                            </Row>
+
+                            <div className="review-form-btns">
+                                <Button className="update" color="info" onClick={this.submitUpdate}>Update</Button>{' '}
+                                <Button color="danger" onClick={this.deletePost}>Delete</Button>
+                            </div>
                         </div>
-                        </div>
-
-                    {/* End of Restaurant form */}
+                        {/* End of activities */}
                     </Form>
                 </Container>
 

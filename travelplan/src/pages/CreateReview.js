@@ -333,22 +333,18 @@ export default class CreateReview extends React.Component {
                         <input type="checkbox" name="tags" value="camping" checked={this.state.tags.includes("camping")} onChange={this.tagList} />Camping
                         <input type="checkbox" name="tags" value="hiking" checked={this.state.tags.includes("hiking")} onChange={this.tagList} />Hiking
                         <input type="checkbox" name="tags" value="sky-diving" checked={this.state.tags.includes("sky-diving")} onChange={this.tagList} />Sky-Diving
-                        <input type="checkbox" name="tags" value="others" checked={this.state.tags.includes("others")} onChange={this.tagList} />Others
                     </div>
                     <div style={{ display: this.state.review_cat_type === "cultural" ? "block" : 'none' }}>
                         <h4>Cultural Immersion</h4>
-                        <input type="checkbox" name="tags" value="museum" checked={this.state.tags.includes("museum")} onChange={this.tagList} />Museum Visit
                          <input type="checkbox" name="tags" value="ethnic" checked={this.state.tags.includes("ethnic")} onChange={this.tagList} />Ethnic Exchange
                          <input type="checkbox" name="tags" value="cooking" checked={this.state.tags.includes("cooking")} onChange={this.tagList} />Local Cooking Class
                          <input type="checkbox" name="tags" value="sport" checked={this.state.tags.includes("sport")} onChange={this.tagList} />Local Sport Activity
-                         <input type="checkbox" name="tags" value="others" checked={this.state.tags.includes("others")} onChange={this.tagList} />Others
                     </div>
                     <div style={{ display: this.state.review_cat_type === "arts" ? "block" : 'none'}}>
                         <h4>Arts & Crafts</h4>
                         <input type="checkbox" name="tags" value="pottery" checked={this.state.tags.includes("pottery")} onChange={this.tagList} />Pottery Making
                         <input type="checkbox" name="tags" value="kite" checked={this.state.tags.includes("kite")} onChange={this.tagList} />Kite Making
                         <input type="checkbox" name="tags" value="painting" checked={this.state.tags.includes("painting")} onChange={this.tagList} />Cultural Painting
-                        <input type="checkbox" name="tags" value="others" checked={this.state.tags.includes("others")} onChange={this.tagList} />Others
                     </div>
 
 
@@ -377,7 +373,7 @@ export default class CreateReview extends React.Component {
                     <div>
                         <h4>Ratings</h4>
                         <input type="radio" name="ratings" value="poor" checked={this.state.ratings == "poor"} onChange={this.userFill} />Poor
-                       <input type="radio" name="ratings" value="good" checked={this.state.ratings == "good"} onChange={this.userFill} />Good
+                       <input type="radio" name="ratings" value="good" checked={this.state.ratings == "satisfactory"} onChange={this.userFill} />Satisfactory
                        <input type="radio" name="ratings" value="excellent" checked={this.state.ratings == "excellent"} onChange={this.userFill} />Excellent
 
                    </div>
