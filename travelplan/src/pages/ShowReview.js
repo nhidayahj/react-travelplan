@@ -47,7 +47,7 @@ export default class ShowReview extends React.Component {
 
     updateForm = (e) => {
         this.setState({
-            [e.target.name]:e.target.value
+            [e.target.name]: e.target.value
 
         })
     }
@@ -79,7 +79,7 @@ export default class ShowReview extends React.Component {
             imageLink: this.state.image,
             ratings: this.state.ratings,
         }
-        console.log("new bject: " , updatedObj)
+        console.log("new bject: ", updatedObj)
         let updateNewReview = await axios.put(`https://3001-tan-dog-b6spunp9.ws-us03.gitpod.io/review/${this.state.edit_review[0]._id}/update`, updatedObj)
         console.log("New updated data:", updateNewReview.data);
         // if (Response.data.status == 200 ){
@@ -89,8 +89,12 @@ export default class ShowReview extends React.Component {
         // }
     }
 
-    render() {
+    deletePost = async () => {
+        let confirmDelete = await axios.post(`https://3001-tan-dog-b6spunp9.ws-us03.gitpod.io/review/${this.state.edit_review[0]._id}/delete`)
+        console.log("Items deleted")
+    }
 
+    render() {
         return (
             <React.Fragment>
                 <CreateReview />
@@ -121,7 +125,7 @@ export default class ShowReview extends React.Component {
                             </Row>
 
                         </React.Fragment>
-                        
+
                         <Row>
                             <Col>
                                 <FormGroup>
@@ -269,11 +273,163 @@ export default class ShowReview extends React.Component {
                             </Row>
 
                             <div className="review-form-btns">
-                                <Button id="update" color="info" onClick={this.submitUpdate}>Update</Button>{' '}
-                                <Button color="danger">Delete</Button>
+                                <Button className="update" color="info" onClick={this.submitUpdate}>Update</Button>{' '}
+                                <Button color="danger" onClick={this.deletePost}>Delete</Button>
                             </div>
                         </div>
-                        {/* End of Accommodation */}
+                        {/* End of Accommodation form */}
+
+                        <div style={{ display: this.state.reviewCategory === "Restaurant" ? "block" : 'none' }}>
+                            <FormGroup tag="fieldset">
+                                <legend>Accommodation Type</legend>
+                                <FormGroup check>
+                                    <Input type="radio" name="reviewType"
+                                        value="fine-dining" onChange={this.updateForm} checked={this.state.reviewType === "fine-dining"} />
+                                    <Label>Fine Dining</Label>
+                                </FormGroup>
+                                <FormGroup check>
+                                    <Input type="radio" name="reviewType"
+                                        value="casual-dining" onChange={this.updateForm} checked={this.state.reviewType === "casual-dining"} />
+                                    <Label>Casual Dining</Label>
+
+                                </FormGroup>
+                                <FormGroup check>
+                                    <Input type="radio" name="reviewType"
+                                        value="street-food" onChange={this.updateForm} checked={this.state.reviewType === "street-food"} />
+                                    <Label>Street Food</Label>
+                                </FormGroup>
+                            </FormGroup>
+                            <Row>
+                                <Col>
+                                    <legend>Restaurant Details</legend>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col sm="4" md="6">
+                                    <FormGroup>
+                                        <Label>Name of Building</Label>
+                                        <Input type="text" name="nameOfPlace"
+                                            value={this.state.nameOfPlace} onChange={this.updateForm} />
+                                    </FormGroup>
+                                </Col>
+                                <Col sm="4" md="6">
+                                    <FormGroup>
+                                        <Label>Location</Label>
+                                        <Input type="text" name="address"
+                                            value={this.state.address} onChange={this.updateForm} />
+                                    </FormGroup>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col>
+                                    <legend>Service Available</legend>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col sm="4">
+                                    <FormGroup check inline>
+                                        <Input type="checkbox" name="tags" value="dine-in" onChange={this.tagList}
+                                            checked={this.state.tags.includes("dine-in")} />
+                                        <Label check>Dine-In</Label>
+                                    </FormGroup>
+                                </Col>
+                                <Col sm="4">
+                                    <FormGroup check inline>
+                                        <Input type="checkbox" name="tags" value="takeaway" onChange={this.tagList}
+                                            checked={this.state.tags.includes("takeaway")} />
+                                        <Label check>Takeaway</Label>
+                                    </FormGroup>
+                                </Col>
+                                <Col sm="4">
+                                    <FormGroup check inline>
+                                        <Input type="checkbox" name="tags" value="drive-thru" onChange={this.tagList}
+                                            checked={this.state.tags.includes("drive-thru")} />
+                                        <Label check>Drive-Thru</Label>
+                                    </FormGroup>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col>
+                                    <legend>Menu Type</legend>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col sm="4">
+                                    <FormGroup check inline>
+                                        <Input type="checkbox" name="tags" value="fusion" onChange={this.tagList}
+                                            checked={this.state.tags.includes("fusion")} />
+                                        <Label check>Fusion</Label>
+                                    </FormGroup>
+                                </Col>
+                                <Col sm="4">
+                                    <FormGroup check inline>
+                                        <Input type="checkbox" name="tags" value="western" onChange={this.tagList}
+                                            checked={this.state.tags.includes("western")} />
+                                        <Label check>Western</Label>
+                                    </FormGroup>
+                                </Col>
+
+                                <Col sm="4">
+                                    <FormGroup check inline>
+                                        <Input type="checkbox" name="tags" value="dessert" onChange={this.tagList}
+                                            checked={this.state.tags.includes("dessert")} />
+                                        <Label check>Dessert</Label>
+                                    </FormGroup>
+                                </Col>
+                            </Row>
+
+                            
+                        <Row>
+                            <Col md="6">
+                                <FormGroup>
+                                    <legend>Review Description</legend>
+                                    <Input type="textarea" name="reviewDesc" value={this.state.reviewDesc} onChange={this.updateForm} />
+                                </FormGroup>
+                            </Col>
+                            <Col md="6">
+
+                                <FormGroup tag="fieldset">
+                                    <legend>Ratings</legend>
+                                    <FormGroup check>
+                                        <Input type="radio" name="ratings"
+                                            value="poor" onChange={this.updateForm} checked={this.state.ratings === "poor"} />
+                                        <Label>Poor</Label>
+                                    </FormGroup>
+                                    <FormGroup check>
+                                        <Input type="radio" name="ratings"
+                                            value="satisfactory" onChange={this.updateForm} checked={this.state.ratings === "satisfactory"} />
+                                        <Label>Satisfactory</Label>
+
+                                    </FormGroup>
+                                    <FormGroup check>
+                                        <Input type="radio" name="ratings"
+                                            value="excellent" onChange={this.updateForm} checked={this.state.ratings === "excellent"} />
+                                        <Label>Excellent</Label>
+                                    </FormGroup>
+                                </FormGroup>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <FormGroup>
+                                    <legend>Image Url</legend>
+                                    <Input
+                                        type="url"
+                                        name="image"
+                                        value={this.state.image}
+                                        onChange={this.updateForm}
+                                    />
+                                </FormGroup>
+                            </Col>
+                        </Row>
+
+                        <div className="review-form-btns">
+                            <Button className="update" color="info" onClick={this.submitUpdate}>Update</Button>{' '}
+                            <Button color="danger" onClick={this.deletePost}>Delete</Button>
+                        </div>
+                        </div>
+
+                    {/* End of Restaurant form */}
                     </Form>
                 </Container>
 

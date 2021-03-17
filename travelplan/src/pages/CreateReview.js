@@ -265,11 +265,7 @@ export default class CreateReview extends React.Component {
                             checked={this.state.tags.includes("local")} />Local
 
 
-                        <input type="checkbox"
-                            name="tags"
-                            value="international"
-                            onChange={this.tagList}
-                            checked={this.state.tags.includes("international")} />International
+    
 
                         <input type="checkbox"
                             name="tags"
@@ -280,28 +276,9 @@ export default class CreateReview extends React.Component {
 
                         <input type="checkbox"
                             name="tags"
-                            value="asian"
+                            value="western"
                             onChange={this.tagList}
-                            checked={this.state.tags.includes("asian")} />Asian
-
-                        <input type="checkbox"
-                            name="tags"
-                            value="bbq"
-                            onChange={this.tagList}
-                            checked={this.state.tags.includes("bbq")} />BBQ
-
-
-                        <input type="checkbox"
-                            name="tags"
-                            value="bakery"
-                            onChange={this.tagList}
-                            checked={this.state.tags.includes("bakery")} />Bakery
-
-                        <input type="checkbox"
-                            name="tags"
-                            value="dessert"
-                            onChange={this.tagList}
-                            checked={this.state.tags.includes("dessert")} />Dessert
+                            checked={this.state.tags.includes("western")} />Western
                     </div>
                     {/* Restaurant Cuisines */}
 
