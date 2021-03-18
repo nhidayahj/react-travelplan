@@ -209,10 +209,10 @@
 
 .filter-info {
     position: absolute;
-    border:1px solid black;
     height:100%;
     width: 60%;
     margin-left:40%;
+    margin-top:10px;
 }
 
 .filter-btn {
@@ -228,7 +228,7 @@
   display: inline-block;
   font-size: 20px;
   cursor: pointer;
-  float: left;
+  /* float: left; */
 }
 
 .filter-btn:hover {
@@ -299,7 +299,7 @@
     .info-btns {
         position: absolute;
         left:83%;
-        bottom:15%
+        bottom:10%
     }
 }
 

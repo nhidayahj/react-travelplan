@@ -16,6 +16,7 @@ export default class Australia extends React.Component {
         aus_reviews: [],
         country: [],
         all_users: [],
+        aus_users: [],
         filter_btn: "",
     }
 
@@ -25,6 +26,17 @@ export default class Australia extends React.Component {
             aus_reviews: response.data[0],
             country: response.data[1],
             all_users: response.data[2]
+        })
+        let aus_user = [];
+        for (let user of this.state.all_users) {
+            for (let review of this.state.aus_reviews) {
+                if (user._id === review.user) {
+                    aus_user.push(user)
+                }
+            }
+        }
+        this.setState({
+            aus_users: aus_user
         })
     }
 
@@ -63,25 +75,24 @@ export default class Australia extends React.Component {
 
     renderAllReview() {
         let aus_accum = [];
-        for (let user of this.state.all_users) {
+        for (let user of this.state.aus_users) {
             for (let user_review of this.state.aus_reviews) {
                 let obj = { review_id: user_review._id, country_id: user_review.country };
-                if (user_review.user === user._id) {
-                    aus_accum.push(
-                        <div key={user_review._id}>
-                            <Card>
-                                <CardImg top width="25%" height="50%" src={user_review.image_link} alt="Card image cap" />
-                                <CardBody>
-                                    <CardTitle tag="h5">City: {user_review.city_town}</CardTitle>
-                                    <CardTitle tag="h5">Category: {user_review.review_category}</CardTitle>
-                                    <CardSubtitle tag="h6" className="mb-2 text-muted">Reviewed by: {user.username}</CardSubtitle>
-                                    <CardText>{user_review.review_desc}</CardText>
-                                    <Link to={{ pathname: "/edit", state: obj }}><Button outline color="primary" size="sm">Edit</Button></Link>
-                                </CardBody>
-                            </Card>
-                        </div>
-                    )
-                }
+                aus_accum.push(
+                    <div key={user_review._id}>
+                        <Card>
+                            <CardImg top width="25%" height="50%" src={user_review.image_link} alt="Card image cap" />
+                            <CardBody>
+                                <CardTitle tag="h5">City: {user_review.city_town}</CardTitle>
+                                <CardTitle tag="h5">Category: {user_review.review_category}</CardTitle>
+                                <CardSubtitle tag="h6" className="mb-2 text-muted">Reviewed by: {user.username}</CardSubtitle>
+                                <CardText>{user_review.review_desc}</CardText>
+                                <Link to={{ pathname: "/edit", state: obj }}><Button outline color="primary" size="sm">Edit</Button></Link>
+                            </CardBody>
+                        </Card>
+                    </div>
+                )
+
             }
         }
         return aus_accum;
@@ -112,7 +123,7 @@ export default class Australia extends React.Component {
                 filter_accum.push(
                     <div key={i._id} className="filter-result">
                         <div className="filter-img">
-                            <img src={i.image_link} className="filter-img-link"></img>
+                            <img src={i.image_link} className="filter-img-link" alt="uploaded img"></img>
                         </div>
                         <div className="filter-info">
                             <h3 className="info-title">{i.review_type}</h3>
@@ -125,15 +136,6 @@ export default class Australia extends React.Component {
                             </div>
                         </div>
                     </div>
-
-                    // <div key={i._id}>
-                    //     <p>City: {i.city_town}</p>
-                    //     <p>Category: {i.review_category}</p>
-                    //     <p>Review Description: {i.review_desc}</p>
-                    //     <p>Reviewed by: {i.username}</p>
-                    //     <Button outline color="primary" size="sm">Update</Button>{' '}
-                    //     <Button color="danger" size="sm">Delete</Button>
-                    // </div>
                 )
             }
         }
