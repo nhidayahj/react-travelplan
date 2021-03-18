@@ -39,10 +39,21 @@
 
 .home-section {
     margin-top:15px;
+    
 }
 
 .card-country{
     margin-top: 8px;
+}
+
+.each-card-body {
+    height: 20vh;
+}
+
+.country-deck {
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .experiences {
@@ -168,17 +179,18 @@
 }
 
 .filter-section {
+    /* border-bottom: 2px solid orange; */
     width: 100%;
-    background-color:rgb(255, 255, 255);
+    /* background-color: rgb(236, 87, 87); */
     overflow: auto;
-    margin: 22px 0 22px;
+    margin: 22px 0 19px;
 }
 
 .filter-result {
     margin: 17px 10px 30px;
     border:2px solid aquamarine;
     height:40vh;
-    background-color: white;
+    background-color:white ;
     position:relative;
 }
 
@@ -239,7 +251,28 @@
 
 .page-search {
     margin:25px 0;
+    padding:10px;
 }
+
+.page-search Button {
+    margin-left: 5px;
+    border-radius: 10px;
+}
+
+.all-reviews {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+ 
+.card-all-reviews {
+    margin:15px 0 10px;
+    
+}
+
+/* .all-reviews {
+    width:30vw;
+} */
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {

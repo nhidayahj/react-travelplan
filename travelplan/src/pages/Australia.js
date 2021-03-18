@@ -3,13 +3,15 @@ import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
     Input, InputGroup, InputGroupAddon,
-    Container,
+    Container, Row, Col,
     Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle, Button
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
-const baseUrl = "https://3001-tan-dog-b6spunp9.ws-us03.gitpod.io/australia"
+const baseUrl = "https://3001-tan-dog-b6spunp9.ws-us03.gitpod.io/australia";
+
+
 
 export default class Australia extends React.Component {
     state = {
@@ -17,6 +19,7 @@ export default class Australia extends React.Component {
         country: [],
         all_users: [],
         aus_users: [],
+        queryBox:"",
         filter_btn: "",
     }
 
@@ -39,6 +42,8 @@ export default class Australia extends React.Component {
             aus_users: aus_user
         })
     }
+
+
 
     renderCountryInfo() {
         // for (let info of this.state.country) {
@@ -80,22 +85,23 @@ export default class Australia extends React.Component {
                 let obj = { review_id: user_review._id, country_id: user_review.country };
                 aus_accum.push(
                     <div key={user_review._id}>
-                        <Card>
-                            <CardImg top width="25%" height="50%" src={user_review.image_link} alt="Card image cap" />
-                            <CardBody>
-                                <CardTitle tag="h5">City: {user_review.city_town}</CardTitle>
-                                <CardTitle tag="h5">Category: {user_review.review_category}</CardTitle>
-                                <CardSubtitle tag="h6" className="mb-2 text-muted">Reviewed by: {user.username}</CardSubtitle>
-                                <CardText>{user_review.review_desc}</CardText>
-                                <Link to={{ pathname: "/edit", state: obj }}><Button outline color="primary" size="sm">Edit</Button></Link>
-                            </CardBody>
-                        </Card>
+                            <Card className="card-all-reviews">
+                                <CardImg top width="25%" height="50%" src={user_review.image_link} alt="Card image cap" />
+                                <CardBody>
+                                    <CardTitle tag="h5">City: {user_review.city_town}</CardTitle>
+                                    <CardTitle tag="h5">Category: {user_review.review_category}</CardTitle>
+                                    <CardSubtitle tag="h6" className="mb-2 text-muted">Reviewed by: {user.username}</CardSubtitle>
+                                    <CardText>{user_review.review_desc}</CardText>
+                                    <Link to={{ pathname: "/edit", state: obj }}><Button outline color="primary" size="sm">Edit</Button></Link>
+                                </CardBody>
+                            </Card>
                     </div>
+
                 )
 
             }
+            return aus_accum;
         }
-        return aus_accum;
     }
 
     filterBtn = (e) => {
@@ -142,6 +148,16 @@ export default class Australia extends React.Component {
         return { heading, filter_accum };
     }
 
+    querySearch = (e) => {
+        this.setState({
+            [e.target.name]:e.target.value
+        })
+    }
+
+    userSearch = async () => {
+        let searchQuery = await axios.get(baseUrl + '/query')
+    }
+
     render() {
         return (
             <React.Fragment>
@@ -149,25 +165,28 @@ export default class Australia extends React.Component {
                 {this.renderCountryInfo()}
                 <Container>
                     <div className="filter-section">
-                        <button value="home" className="filter-btn" onClick={this.filterBtn}>Home</button>
+                        <button value="Home" className="filter-btn" onClick={this.filterBtn}>Home</button>
                         <button value="Accommodation" className="filter-btn" onClick={this.filterBtn}>Accommodation</button>
                         <button value="Restaurant" className="filter-btn" onClick={this.filterBtn}>Restaurant</button>
                         <button value="Activities" className="filter-btn" onClick={this.filterBtn}>Activities</button>
                     </div>
 
                     <div>
-                        <h3 className="page-title">travellers reviews</h3>
+                        <h3 className="page-title">Discover Australia</h3>
                     </div>
                     <div className="page-search">
                         <InputGroup>
-                            <Input placeholder="search by city, keywords, username .." />
+                            <Input placeholder="search by city, keywords .." 
+                            name="queryBox" value={this.state.queryBox} onChange={this.querySearch}/>
                             <InputGroupAddon addonType="append">
-                                <Button outline color="info">Search</Button>
+                                <Button outline color="info" onClick={this.userSearch}>Search</Button>
                             </InputGroupAddon>
                         </InputGroup>
                     </div>
 
-                    <div style={{ display: this.state.filter_btn === "home" || this.state.filter_btn === "" ? 'block' : 'none' }}>
+                    <div style={{ display: this.state.filter_btn === "Home" || this.state.filter_btn === "" ? 'block' : 'none' }}
+                        className="all-reviews">
+                        
                         {this.renderAllReview()}
                     </div>
                     <div style={{
