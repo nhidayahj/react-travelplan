@@ -28,7 +28,7 @@ export default class Homepage extends React.Component {
         for (let i of this.state.all_countries) {
             card_country.push(
 
-                <Col md="6" lg="4">
+                <Col md="6" lg="4" key={i._id}>
                     <Card outline color="info" className="card-country">
                         <CardImg className="each-card" top width="100%" src={i.image_url} alt="country image cap" />
                         <CardBody className="each-card-body">
@@ -39,6 +39,8 @@ export default class Homepage extends React.Component {
                         </CardBody>
                     </Card>
                 </Col>
+
+
                 // <Card outline color="info" className="card-country">
                 //     <CardImg className="each-card" top width="100%" src={i.image_url} alt="country image cap" />
                 //     <CardBody className="each-card-body">

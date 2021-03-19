@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
-    Input, InputGroup, InputGroupAddon,
+    Input, InputGroup,
     Container, Row, Col,
     Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle, Button
@@ -19,8 +19,9 @@ export default class Australia extends React.Component {
         country: [],
         all_users: [],
         aus_users: [],
-        queryBox:"",
+        queryBox: [],
         filter_btn: "",
+        newResult: ""
     }
 
     async componentDidMount() {
@@ -82,9 +83,10 @@ export default class Australia extends React.Component {
         let aus_accum = [];
         for (let user of this.state.aus_users) {
             for (let user_review of this.state.aus_reviews) {
-                let obj = { review_id: user_review._id, country_id: user_review.country };
-                aus_accum.push(
-                    <div key={user_review._id}>
+                if (user._id === user_review.user) {
+                    let obj = { review_id: user_review._id, country_id: user_review.country };
+                    aus_accum.push(
+                        <div key={user_review._id}>
                             <Card className="card-all-reviews">
                                 <CardImg top width="25%" height="50%" src={user_review.image_link} alt="Card image cap" />
                                 <CardBody>
@@ -95,13 +97,13 @@ export default class Australia extends React.Component {
                                     <Link to={{ pathname: "/edit", state: obj }}><Button outline color="primary" size="sm">Edit</Button></Link>
                                 </CardBody>
                             </Card>
-                    </div>
+                        </div>
 
-                )
-
+                    )
+                }
             }
-            return aus_accum;
         }
+        return aus_accum;
     }
 
     filterBtn = (e) => {
@@ -150,12 +152,17 @@ export default class Australia extends React.Component {
 
     querySearch = (e) => {
         this.setState({
-            [e.target.name]:e.target.value
+            [e.target.name]: e.target.value
         })
     }
 
     userSearch = async () => {
-        let searchQuery = await axios.get(baseUrl + '/query')
+        let queryBox = { queryBox: this.state.queryBox }
+        let searchQuery = await axios.post(baseUrl, queryBox)
+        console.log(searchQuery.data);
+        this.setState({
+            newResult: searchQuery.data
+        })
     }
 
     render() {
@@ -172,21 +179,39 @@ export default class Australia extends React.Component {
                     </div>
 
                     <div>
+                        <hr className="divider"></hr>
                         <h3 className="page-title">Discover Australia</h3>
+                        <hr className="divider"></hr>
                     </div>
                     <div className="page-search">
-                        <InputGroup>
-                            <Input placeholder="search by city, keywords .." 
-                            name="queryBox" value={this.state.queryBox} onChange={this.querySearch}/>
-                            <InputGroupAddon addonType="append">
-                                <Button outline color="info" onClick={this.userSearch}>Search</Button>
-                            </InputGroupAddon>
-                        </InputGroup>
+                        <h4 className="page-title-display">Filter Search </h4>
+                        <Row>
+                            <Col md="4" sm="4">
+                                <InputGroup>
+                                    <Input placeholder="search by city, keywords .."
+                                        name="queryBox" value={this.state.queryBox} onChange={this.querySearch} />
+                                </InputGroup></Col>
+                            <Col md="4" sm="4">
+                                <InputGroup>
+                                    <Input placeholder="search by city, keywords .."
+                                        name="queryBox" value={this.state.queryBox} onChange={this.querySearch} />
+                                </InputGroup>
+                            </Col>
+                            <Col md="4" sm="4">
+                                <InputGroup>
+                                    <Input placeholder="search by city, keywords .."
+                                        name="queryBox" value={this.state.queryBox} onChange={this.querySearch} />
+                                </InputGroup>
+                            </Col>
+                        </Row>
+                        <div>
+                            <Button color="info" className="page-search-btn">Search</Button>
+                        </div>
                     </div>
 
                     <div style={{ display: this.state.filter_btn === "Home" || this.state.filter_btn === "" ? 'block' : 'none' }}
                         className="all-reviews">
-                        
+
                         {this.renderAllReview()}
                     </div>
                     <div style={{

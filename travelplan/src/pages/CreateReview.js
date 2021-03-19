@@ -293,7 +293,7 @@ export default class CreateReview extends React.Component {
                     <div>
                         <h4>Ratings</h4>
                         <input type="radio" name="ratings" value="poor" checked={this.state.ratings === "poor"} onChange={this.userFill} />Poor
-                       <input type="radio" name="ratings" value="good" checked={this.state.ratings === "good"} onChange={this.userFill} />Good
+                       <input type="radio" name="ratings" value="satisfactory" checked={this.state.ratings === "satisfactory"} onChange={this.userFill} />Satisfactory
                        <input type="radio" name="ratings" value="excellent" checked={this.state.ratings === "excellent"} onChange={this.userFill} />Excellent
 
                    </div>

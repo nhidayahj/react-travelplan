@@ -6,7 +6,7 @@
 .page-title {
     display:flex;
     justify-content: center;
-    margin-top:20px;
+    margin-top:8px;
     padding:10px;
     font-family: 'Poppins', sans-serif;
     font-size:35px;
@@ -16,6 +16,9 @@
     padding:15px;
 }
 
+.divider {
+    border: 1px solid aquamarine;
+}
 
 .page-img {
     margin-top:10px;
@@ -46,9 +49,6 @@
     margin-top: 8px;
 }
 
-.each-card-body {
-    height: 20vh;
-}
 
 .country-deck {
     display:flex;
@@ -154,9 +154,6 @@
     font-size: 35px;
 } */
 
-
-
-
 .header-text {
     /* position: absolute; */
     left:50px;
@@ -179,11 +176,9 @@
 }
 
 .filter-section {
-    /* border-bottom: 2px solid orange; */
     width: 100%;
-    /* background-color: rgb(236, 87, 87); */
     overflow: auto;
-    margin: 22px 0 19px;
+    margin: 22px 0 10px;
 }
 
 .filter-result {
@@ -197,10 +192,10 @@
 .page-title-display {
     display:flex;
     justify-content: center;
-    margin-top:20px;
+    margin-top:14px;
     padding:10px;
     font-family: 'Poppins', sans-serif;
-    font-size:25px;
+    font-size:28px;
 }
 
 .filter-img {
@@ -234,7 +229,7 @@
   border: none;
   font-family: 'Poppins', sans-serif;
   color: black;
-  padding: 15px 40px;
+  padding: 10px 40px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -250,16 +245,27 @@
 }
 
 .page-search {
+    position: relative;
     margin:25px 0;
     padding:10px;
 }
 
-.page-search Button {
+/* .page-search Button {
     margin-left: 5px;
     border-radius: 10px;
+} */
+
+.page-search-btn {
+    position:absolute;
+    margin: 9px 0 15px;
+    right:15px;
+
+    border-radius: 15px;
 }
 
 .all-reviews {
+    margin-top: 15px;
+    padding-top: 20px;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -274,12 +280,12 @@
     width:30vw;
 } */
 
-@media (prefers-reduced-motion: no-preference) {
+/* @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
+ */
 
 
 @media screen and (max-width:426px) {
@@ -334,6 +340,7 @@
         left:83%;
         bottom:10%
     }
+   
 }
 
 @media screen and (min-width:427px) {
@@ -382,7 +389,7 @@
     .page-title-display {
         display:flex;
         justify-content: center;
-        font-size:22px;
+        font-size:25px;
     }
     .filter-result{
         height:34vh;
