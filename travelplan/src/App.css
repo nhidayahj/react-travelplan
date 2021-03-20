@@ -199,9 +199,9 @@
 }
 
 .filter-img {
-    position: absolute;;
+    position: absolute;
     border: 1px solid white;
-    border-right-color: aquamarine;
+    /* border-right-color: black; */
     height:100%;
     width:35%;
     background-color: yellowgreen;
@@ -215,11 +215,13 @@
 }
 
 .filter-info {
+    /* border:1px solid black; */
     position: absolute;
-    height:100%;
+    height:90%;
     width: 60%;
     margin-left:40%;
     margin-top:10px;
+     font-family: 'Poppins', sans-serif;
 }
 
 .filter-btn {
@@ -259,8 +261,7 @@
     position:absolute;
     margin: 9px 0 15px;
     right:15px;
-
-    border-radius: 15px;
+    border-radius: 20px;
 }
 
 .all-reviews {
@@ -273,7 +274,19 @@
  
 .card-all-reviews {
     margin:15px 0 10px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.pill-tags {
+    color:black;
+    background-color: #f0b3ff;
+    margin-right:3px;
     
+}
+
+.pill-type {
+    color:black;
+    background-color: #8080ff;
 }
 
 /* .all-reviews {
@@ -309,12 +322,12 @@
         margin:5px 12px;
     }
     .filter-result{
-        height:25vh;
+        height:55vh;
     }
     .filter-img {
         margin-left: 0;
         height:55%;
-        width:60%;
+        width:100%;
     }
     .filter-img-link{
         max-width:100%;
@@ -322,8 +335,9 @@
         object-fit: cover;
     }
     .filter-info{
-        height:40%;
+        height:35vh;
         width:100%;
+        padding-top:95px;
         margin-left: auto;
         margin-top: 160px;
     }
@@ -338,9 +352,12 @@
     .info-btns {
         position: absolute;
         left:83%;
-        bottom:10%
+        bottom:10%;
     }
-   
+    .page-title-display {
+        padding:20px;
+    }
+      
 }
 
 @media screen and (min-width:427px) {
@@ -374,6 +391,8 @@
         padding:0 5px;
         background-position: center;
     }
+    
+    
 }
 
 
@@ -391,9 +410,9 @@
         justify-content: center;
         font-size:25px;
     }
-    .filter-result{
-        height:34vh;
-    }
+    /* .filter-result{
+        height:55vh;
+    } */
     
     .filter-img-link {
         max-width:100%;
