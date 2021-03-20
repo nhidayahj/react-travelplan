@@ -16,11 +16,11 @@ export default class Japan extends React.Component {
         all_users: [],
         jap_users: [],
         filter_btn: "",
- 
+
 
     }
 
-     async componentDidMount() {
+    async componentDidMount() {
         let response = await axios.get(baseUrl)
         this.setState({
             jap_reviews: response.data[0],
@@ -84,43 +84,28 @@ export default class Japan extends React.Component {
         return { heading, filter_accum };
     }
 
-    renderReview() {
-        let jap_accum = [];
-        for (let i of this.state.jap_reviews) {
-            let obj = {review_id:i._id, country_id:i.country};
-            jap_accum.push(
-                <div key={i._id}>
-                    <p>City: {i.city_town}</p>
-                    <p>Category: {i.review_category}</p>
-                    <p>Review Description: {i.review_desc}</p>
-                    <p>Reviewed by: {i.username}</p>
-                    <Link to={{pathname:"/edit", state:obj}}><Button outline color="primary" size="sm">Edit</Button></Link>
-                </div>
-            )
-        }
-        return jap_accum;
-    }
 
     renderAllReview() {
         let jap_accum = [];
         for (let user of this.state.jap_users) {
             for (let user_review of this.state.jap_reviews) {
-                let obj = { review_id: user_review._id, country_id: user_review.country };
-                jap_accum.push(
-                    <div key={user_review._id}>
-                        <Card>
-                            <CardImg top width="25%" height="50%" src={user_review.image_link} alt="Card image cap" />
-                            <CardBody>
-                                <CardTitle tag="h5">City: {user_review.city_town}</CardTitle>
-                                <CardTitle tag="h5">Category: {user_review.review_category}</CardTitle>
-                                <CardSubtitle tag="h6" className="mb-2 text-muted">Reviewed by: {user.username}</CardSubtitle>
-                                <CardText>{user_review.review_desc}</CardText>
-                                <Link to={{ pathname: "/edit", state: obj }}><Button outline color="primary" size="sm">Edit</Button></Link>
-                            </CardBody>
-                        </Card>
-                    </div>
-                )
-
+                if (user._id === user_review.user) {
+                    let obj = { review_id: user_review._id, country_id: user_review.country };
+                    jap_accum.push(
+                        <div key={user_review._id}>
+                            <Card>
+                                <CardImg top width="25%" height="50%" src={user_review.image_link} alt="Card image cap" />
+                                <CardBody>
+                                    <CardTitle tag="h5">City: {user_review.city_town}</CardTitle>
+                                    <CardTitle tag="h5">Category: {user_review.review_category}</CardTitle>
+                                    <CardSubtitle tag="h6" className="mb-2 text-muted">Reviewed by: {user.username}</CardSubtitle>
+                                    <CardText>{user_review.review_desc}</CardText>
+                                    <Link to={{ pathname: "/edit", state: obj }}><Button outline color="primary" size="sm">Edit</Button></Link>
+                                </CardBody>
+                            </Card>
+                        </div>
+                    )
+                }
             }
         }
         return jap_accum;

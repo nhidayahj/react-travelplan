@@ -19,13 +19,15 @@ export default class Australia extends React.Component {
         country: [],
         all_users: [],
         aus_users: [],
-        queryBox: [],
+        queryCity: "",
+        queryTags: [],
+        queryReviewer: "",
         filter_btn: "",
         newResult: ""
     }
 
     async componentDidMount() {
-        let response = await axios.get(baseUrl)
+        let response = await axios.get(baseUrl + "/all")
         this.setState({
             aus_reviews: response.data[0],
             country: response.data[1],
@@ -156,13 +158,45 @@ export default class Australia extends React.Component {
         })
     }
 
+
     userSearch = async () => {
-        let queryBox = { queryBox: this.state.queryBox }
-        let searchQuery = await axios.post(baseUrl, queryBox)
-        console.log(searchQuery.data);
-        this.setState({
-            newResult: searchQuery.data
-        })
+        let searchQuery;
+        if (this.state.queryCity && this.state.queryTags) {
+            searchQuery = await axios.post(baseUrl, {
+                queryCity:this.state.queryCity,
+                queryTags:this.state.queryTags
+            })
+            this.setState({
+                newResult:searchQuery.data
+            })
+            console.log("Search by City & Tags: ",searchQuery.data)
+        } else if (this.state.queryCity){
+            searchQuery = await axios.post(baseUrl, {
+                queryCity:this.state.queryCity
+            })
+            this.setState({
+                newResult: searchQuery.data
+            })
+            console.log("Search by city: " ,searchQuery.data)
+        } else if (this.state.queryTags) {
+            searchQuery = await axios.post(baseUrl, {
+                queryTags:this.state.queryTags
+            })
+            this.setState({
+                newResult: searchQuery.data
+            })
+            console.log("Search by tags: " ,searchQuery.data)
+        }
+        // let queryBox = { queryCity: this.state.queryCity}
+        // console.log(queryBox)
+        // let searchQuery = await axios.post(baseUrl, {
+        //     queryCity:this.state.queryCity,
+        //     queryTags:[this.state.queryTags]
+        // })
+        // console.log(searchQuery.data);
+        // this.setState({
+        //     newResult: searchQuery.data
+        // })
     }
 
     render() {
@@ -188,24 +222,24 @@ export default class Australia extends React.Component {
                         <Row>
                             <Col md="4" sm="4">
                                 <InputGroup>
-                                    <Input placeholder="search by city, keywords .."
-                                        name="queryBox" value={this.state.queryBox} onChange={this.querySearch} />
+                                    <Input placeholder="search by city .."
+                                        name="queryCity" value={this.state.queryBox} onChange={this.querySearch} />
                                 </InputGroup></Col>
                             <Col md="4" sm="4">
                                 <InputGroup>
-                                    <Input placeholder="search by city, keywords .."
-                                        name="queryBox" value={this.state.queryBox} onChange={this.querySearch} />
+                                    <Input placeholder="search by keywords, tags .."
+                                        name="queryTags" value={this.state.queryBox} onChange={this.querySearch} />
                                 </InputGroup>
                             </Col>
                             <Col md="4" sm="4">
                                 <InputGroup>
-                                    <Input placeholder="search by city, keywords .."
-                                        name="queryBox" value={this.state.queryBox} onChange={this.querySearch} />
+                                    <Input placeholder="search by reviewer .."
+                                        name="queryReviewer" value={this.state.queryBox} onChange={this.querySearch} />
                                 </InputGroup>
                             </Col>
                         </Row>
                         <div>
-                            <Button color="info" className="page-search-btn">Search</Button>
+                            <Button color="info" className="page-search-btn" onClick={this.userSearch}>Search</Button>
                         </div>
                     </div>
 
