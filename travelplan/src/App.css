@@ -184,7 +184,7 @@
 .filter-result {
     margin: 17px 10px 30px;
     border:2px solid aquamarine;
-    height:40vh;
+    height:46vh;
     background-color:white ;
     position:relative;
 }
@@ -217,11 +217,11 @@
 .filter-info {
     /* border:1px solid black; */
     position: absolute;
-    height:90%;
-    width: 60%;
-    margin-left:40%;
-    margin-top:10px;
-     font-family: 'Poppins', sans-serif;
+    height:100%;
+    width: 63%;
+    right:0;
+    /* margin-top:5px; */
+    font-family: 'Poppins', sans-serif;
 }
 
 .filter-btn {
@@ -286,19 +286,64 @@
 
 .pill-type {
     color:black;
+    margin-right:3px;
     background-color: #8080ff;
 }
 
-/* .all-reviews {
-    width:30vw;
-} */
-
-/* @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.pill-accom {
+    color:black;
+    margin-right:3px;
+    background-color: #ffb366;
 }
- */
+
+.pill-rest {
+   color:black;
+   margin-right:3px;
+    background-color: #00b300; 
+}
+
+.pill-act {
+    color:black;
+    margin-right:3px;
+    background-color:#ff1a66;
+}
+
+.info-title{
+    padding-top:12px;
+}
+
+.info-title h5{
+    font-size: 20px;
+    font-weight:bold;
+}
+
+.info-sub-title {
+    padding-top: 15px;
+}
+
+.info-sub-title h6 {
+    font-weight: bold;
+}
+
+.info-btns {
+    position:absolute; 
+    top:89%;
+    right:3%;
+}
+
+.reviewed-by {
+    position:absolute;
+    font-style:italic;
+    font-weight: bold;
+    top:92%;
+    left:3%;
+}
+
+.review-desc {
+    font-style: italic;
+    padding-top:20px;
+    font-size: 15px;
+}
 
 
 @media screen and (max-width:426px) {
@@ -322,11 +367,11 @@
         margin:5px 12px;
     }
     .filter-result{
-        height:55vh;
+        height:75vh;
     }
     .filter-img {
         margin-left: 0;
-        height:55%;
+        height:35%;
         width:100%;
     }
     .filter-img-link{
@@ -335,29 +380,51 @@
         object-fit: cover;
     }
     .filter-info{
-        height:35vh;
+        height:48vh;
         width:100%;
-        padding-top:95px;
         margin-left: auto;
-        margin-top: 160px;
+        bottom:0;
     }
     .info-title {
         margin-left:14px;
-        font-size:18px;
+    }
+
+    .info-title h5 {
+        font-size:17px;
+    }
+
+    .info-sub-title {
+        margin-left:14px;
+    }
+
+    .info-sub-title h6 {
+        font-size:14px;
     }
     .info p {
         margin-left:10px;
         font-size:15px;
     }
     .info-btns {
-        position: absolute;
-        left:83%;
-        bottom:10%;
+        /* position: absolute; */
+        top:89%;
+        right:5%;
     }
     .page-title-display {
         padding:20px;
     }
-      
+    .search-field {
+        margin-top:8px;
+    }
+    .reviewed-by {
+        top:92%;
+        font-size:13px;
+    }
+    .review-desc p{
+        padding-top:5px;
+        padding-right:5px;
+        font-size:12px;
+    }
+    
 }
 
 @media screen and (min-width:427px) {
@@ -391,8 +458,6 @@
         padding:0 5px;
         background-position: center;
     }
-    
-    
 }
 
 
@@ -410,19 +475,22 @@
         justify-content: center;
         font-size:25px;
     }
-    /* .filter-result{
-        height:55vh;
-    } */
-    
     .filter-img-link {
         max-width:100%;
         height:100%;
         background-size: contain;
     }
+    .filter-info h4, h6{
+        font-size:15px;
+    }
+    .review-desc {
+        padding-top: 10px;
+        font-size:13px;
+    }
+    .reviewed-by {
+        font-size:13px;
+    }
 }
-
-
-
 
 .App-header {
   background-color: #282c34;

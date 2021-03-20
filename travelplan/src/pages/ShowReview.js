@@ -232,7 +232,7 @@ export default class ShowReview extends React.Component {
                                 <Col md="6">
                                     <FormGroup>
                                         <legend>Review Description</legend>
-                                        <Input type="textarea" name="reviewDesc" value={this.state.reviewDesc} onChange={this.updateForm} />
+                                        <Input type="textarea" name="reviewDesc" value={this.state.reviewDesc} onChange={this.updateForm} maxLength={300} />
                                     </FormGroup>
                                 </Col>
                                 <Col md="6">
@@ -383,7 +383,7 @@ export default class ShowReview extends React.Component {
                                 <Col md="6">
                                     <FormGroup>
                                         <legend>Review Description</legend>
-                                        <Input type="textarea" name="reviewDesc" value={this.state.reviewDesc} onChange={this.updateForm} />
+                                        <Input type="textarea" name="reviewDesc" value={this.state.reviewDesc} onChange={this.updateForm} maxLength={300}/>
                                     </FormGroup>
                                 </Col>
                                 <Col md="6">
@@ -566,7 +566,7 @@ export default class ShowReview extends React.Component {
                                 <Col md="6">
                                     <FormGroup>
                                         <legend>Review Description</legend>
-                                        <Input type="textarea" name="reviewDesc" value={this.state.reviewDesc} onChange={this.updateForm} />
+                                        <Input type="textarea" name="reviewDesc" value={this.state.reviewDesc} onChange={this.updateForm} maxLength={300}/>
                                     </FormGroup>
                                 </Col>
                                 <Col md="6">

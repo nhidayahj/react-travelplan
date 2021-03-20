@@ -173,7 +173,7 @@ export default class CreateReview extends React.Component {
                     {/* Description */}
                     <div>
                         <h4>Review Description</h4>
-                        <textarea name="reviewDesc" value={this.state.reviewDesc} onChange={this.userFill} />
+                        <textarea name="reviewDesc" value={this.state.reviewDesc} onChange={this.userFill} maxLength={300}/>
                     </div>
 
                     {/* Photo URL */}
@@ -280,7 +280,7 @@ export default class CreateReview extends React.Component {
                     {/* Description */}
                     <div>
                         <h4>Review Description</h4>
-                        <textarea name="reviewDesc" value={this.state.reviewDesc} onChange={this.userFill} />
+                        <textarea name="reviewDesc" value={this.state.reviewDesc} onChange={this.userFill} maxLength={300}/>
                     </div>
 
                     {/* Photo URL */}
@@ -354,7 +354,7 @@ export default class CreateReview extends React.Component {
                     {/* Description */}
                     <div>
                         <h4>Review Description</h4>
-                        <textarea name="reviewDesc" value={this.state.reviewDesc} onChange={this.userFill} />
+                        <textarea name="reviewDesc" value={this.state.reviewDesc} onChange={this.userFill} maxLength={300}/>
                     </div>
 
                     {/* Photo URL */}

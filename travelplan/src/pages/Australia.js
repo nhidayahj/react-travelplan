@@ -4,8 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {
     Input, InputGroup,
     Container, Row, Col,
-    Card, CardImg, CardText, CardBody,
-    CardTitle, CardSubtitle, Button, Badge
+    Button, Badge
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
@@ -20,7 +19,7 @@ export default class Australia extends React.Component {
         all_users: [],
         aus_users: [],
         queryCity: "",
-        queryTags: [],
+        queryTags: "",
         filter_btn: "",
         newResult: ""
     }
@@ -96,31 +95,52 @@ export default class Australia extends React.Component {
         return tag_pill;
     }
 
-    reviewType(review_type){
-       return (<Badge pill className="pill-type">{review_type}</Badge>)
+    reviewType(review_type) {
+        return (<Badge pill className="pill-type">{review_type}</Badge>)
+    }
+
+    reviewCat(category) {
+        if (category === "Accommodation") {
+            return (<Badge pill className="pill-accom">{category}</Badge>)
+        } else if (category === "Restaurant") {
+            return (<Badge pill className="pill-rest">{category}</Badge>)
+        } else if (category === "Activities") {
+            return (<Badge pill className="pill-act">{category}</Badge>)
+        }
     }
 
 
     renderAllReview() {
         let aus_accum = [];
-
-        for (let user_review of this.state.aus_reviews) {
-            let obj = { review_id: user_review._id, country_id: user_review.country };
+        for (let i of this.state.aus_reviews) {
+            let obj = { review_id: i._id, country_id: i.country };
             aus_accum.push(
-                <div key={user_review._id}>
-                    <Card className="card-all-reviews">
-                        <CardImg top width="25%" height="50%" src={user_review.image_link} alt="Card image cap" />
-                        <CardBody>
-                            <CardTitle tag="h5">City: {user_review.city_town}</CardTitle>
-                            <CardTitle tag="h5">Category: {user_review.review_category}</CardTitle>
-                            <CardSubtitle tag="h6" className="mb-2 text-muted">Reviewed by: {this.userReview(user_review.user)}</CardSubtitle>
-                            <CardText>{user_review.review_desc}</CardText>
-                            <Link to={{ pathname: "/edit", state: obj }}><Button outline color="primary" size="sm">Edit</Button></Link>
-                        </CardBody>
-                    </Card>
+                <div key={i._id} className="filter-result">
+                    <div className="filter-img">
+                        <img src={i.image_link} className="filter-img-link" alt="uploaded img"></img>
+                    </div>
+                    <div className="filter-info">
+                        <div className="info-title">
+                            <h5>Name: {i.name_of_place}</h5>
+                            <h5>Address: {i.review_address}</h5>
+                        </div>
+                        <div className="info-sub-title">
+                            <h6>Location: Australia, {i.city_town} </h6>
+                            <h6>Category: {this.reviewCat(i.review_category)}</h6>
+                            <h6>Review Type: {this.reviewType(i.review_type)}</h6>
+                            <h6>Tags: <span>{this.reviewTags(i.review_tags)}</span></h6>
+                        </div>
+                        <div className="info">
+                            <div className="review-desc"><p>"{i.review_desc}"</p></div>
+                        </div>
+                        <div className="reviewed-by"><p>Reviewed by: {this.userReview(i.user)}</p></div>
+                        <div className="info-btns">
+                            <div><Link to={{ pathname: "/edit", state: obj }}>
+                                <Button outline color="primary" size="sm" className="info-edit-btns">Edit</Button></Link></div>
+                        </div>
+                    </div>
                 </div>)
         }
-
         return aus_accum;
     }
 
@@ -153,20 +173,26 @@ export default class Australia extends React.Component {
                             <img src={i.image_link} className="filter-img-link" alt="uploaded img"></img>
                         </div>
                         <div className="filter-info">
-                            <h4 className="info-title" style={{fontWeight:"bold"}}>Australia, {i.city_town}</h4>
-                            <h6 className="info-title" style={{fontWeight:"bold"}}>Review Type: {this.reviewType(i.review_type)}</h6>
-                            <div className="info">
-                            <p style={{fontWeight:"bold"}}>tags: <span>{this.reviewTags(i.review_tags)}</span></p> 
-                                <p>Description: {i.review_desc}</p>
-                                <p>Reviewed by: {this.userReview(i.user)}</p>
+                            <div className="info-title">
+                                <h5>Name: {i.name_of_place}</h5>
+                                <h5>Address: {i.review_address}</h5>
                             </div>
+                            <div className="info-sub-title">
+                                <h6>Location: Australia, {i.city_town} </h6>
+                                <h6>Category: {this.reviewCat(i.review_category)}</h6>
+                                <h6>Review Type: {this.reviewType(i.review_type)}</h6>
+                                <h6>Tags: <span>{this.reviewTags(i.review_tags)}</span></h6>
+                            </div>
+                            <div className="info">
+                                <div className="review-desc"><p>"{i.review_desc}"</p></div>
+                            </div>
+                            <div className="reviewed-by"><p>Reviewed by: {this.userReview(i.user)}</p></div>
                             <div className="info-btns">
                                 <div><Link to={{ pathname: "/edit", state: obj }}>
                                     <Button outline color="primary" size="sm" className="info-edit-btns">Edit</Button></Link></div>
                             </div>
                         </div>
-                    </div>
-                )
+                    </div>)
             }
         }
         return { heading, filter_accum };
@@ -212,23 +238,34 @@ export default class Australia extends React.Component {
     renderUserSearch = () => {
         let search_accum = [];
         for (let i of this.state.newResult) {
+            let obj = { review_id: i._id, country_id: i.country };
+            // heading = this.filterDisplayTitle()
             search_accum.push(
                 <div key={i._id} className="filter-result">
                     <div className="filter-img">
                         <img src={i.image_link} className="filter-img-link" alt="uploaded img"></img>
                     </div>
                     <div className="filter-info">
-                        <h3 className="info-title">City: {i.city_town}</h3>
-                        <div className="info">
-                            <p>Description: {i.review_desc}</p>
-                            <p>Reviewed by: user</p>
+                        <div className="info-title">
+                            <h5>Name: {i.name_of_place}</h5>
+                            <h5>Address: {i.review_address}</h5>
                         </div>
+                        <div className="info-sub-title">
+                            <h6>Location: Australia, {i.city_town} </h6>
+                            <h6>Category: {this.reviewCat(i.review_category)}</h6>
+                            <h6>Review Type: {this.reviewType(i.review_type)}</h6>
+                            <h6>Tags: <span>{this.reviewTags(i.review_tags)}</span></h6>
+                        </div>
+                        <div className="info">
+                            <div className="review-desc"><p>"{i.review_desc}"</p></div>
+                        </div>
+                        <div className="reviewed-by"><p>Reviewed by: {this.userReview(i.user)}</p></div>
                         <div className="info-btns">
-                            <div><Button outline color="info" size="sm">edit</Button></div>
+                            <div><Link to={{ pathname: "/edit", state: obj }}>
+                                <Button outline color="primary" size="sm" className="info-edit-btns">Edit</Button></Link></div>
                         </div>
                     </div>
-                </div>
-            )
+                </div>)
         }
         return search_accum;
     }
@@ -254,23 +291,23 @@ export default class Australia extends React.Component {
                     <div className="page-search">
                         <h4 className="page-title-display">Filter Search </h4>
                         <Row>
-                            <Col md="4" sm="4">
-                                <InputGroup>
+                            <Col md="6" sm="4">
+                                <InputGroup className="search-field">
                                     <Input placeholder="search by city .."
                                         name="queryCity" value={this.state.queryBox} onChange={this.querySearch} />
                                 </InputGroup></Col>
-                            <Col md="4" sm="4">
-                                <InputGroup>
+                            <Col md="6" sm="4">
+                                <InputGroup className="search-field">
                                     <Input placeholder="search by keywords, tags .."
                                         name="queryTags" value={this.state.queryBox} onChange={this.querySearch} />
                                 </InputGroup>
                             </Col>
-                            <Col md="4" sm="4">
+                            {/* <Col md="4" sm="4">
                                 <InputGroup>
                                     <Input placeholder="search by reviewer .."
                                         name="queryReviewer" value={this.state.queryBox} onChange={this.querySearch} />
                                 </InputGroup>
-                            </Col>
+                            </Col> */}
                         </Row>
                         <div>
                             <Button color="info" className="page-search-btn" onClick={this.userSearch}>Search</Button>
@@ -295,7 +332,7 @@ export default class Australia extends React.Component {
 
                     </div>
                     <div style={{ display: this.state.newResult !== "" ? "block" : "none" }}>
-                        <h3 className="page-title-display">Filtered Search</h3>
+                        <h3 className="page-title-display">Search Result(s)</h3>
                         {this.renderUserSearch()}
                     </div>
 
