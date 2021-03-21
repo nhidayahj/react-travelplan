@@ -62,7 +62,8 @@ export default class CreateReview extends React.Component {
                     <Col>
                         <FormGroup>
                             <legend>Review Description</legend>
-                            <Input type="textarea" name="reviewDesc" value={this.state.reviewDesc} onChange={this.userFill} maxLength={300} />
+                            <Input type="textarea" name="reviewDesc" value={this.state.reviewDesc} onChange={this.userFill} 
+                            maxLength={300} />
                         </FormGroup>
                     </Col>
                 </Row>
@@ -104,8 +105,8 @@ export default class CreateReview extends React.Component {
                 </Row>
 
                 <div className="review-form-btns">
-                    <Button className="update" color="info" onClick={this.submitReview}>Submit</Button>{' '}
-                    {/* <Button color="danger" onClick={this.deletePost}>Cancel</Button> */}
+                    <Button className="submit" color="primary" onClick={this.submitReview}>Submit</Button>{' '}
+                    <Button color="danger" onClick={this.deletePost}>Cancel</Button>
                 </div>
             </React.Fragment>
         )
@@ -136,7 +137,7 @@ export default class CreateReview extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <Container>
+                <Container className="review-body">
                     <h2 className="page-title">Create a Review</h2>
                     <Form>
                         <Row>

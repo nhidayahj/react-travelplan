@@ -3,7 +3,7 @@ import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
     Container, Row, Col, Input, InputGroup,
-    Button,Badge
+    Button, Badge
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
@@ -18,7 +18,7 @@ export default class Australia extends React.Component {
         queryCity: "",
         queryTags: "",
         filter_btn: "",
-        search_flag:false,
+        search_flag: false,
         newResult: ""
 
     }
@@ -90,7 +90,7 @@ export default class Australia extends React.Component {
                             <h5>Address: {i.review_address}</h5>
                         </div>
                         <div className="info-sub-title">
-                            <h6>Location: Australia, {i.city_town} </h6>
+                            <h6>Location: South Korea, {i.city_town} </h6>
                             <h6>Category: {this.reviewCat(i.review_category)}</h6>
                             <h6>Review Type: {this.reviewType(i.review_type)}</h6>
                             <h6>Tags: <span>{this.reviewTags(i.review_tags)}</span></h6>
@@ -109,7 +109,7 @@ export default class Australia extends React.Component {
         return all_accum;
     }
 
-    
+
     filterBtn = (e) => {
         this.setState({
             filter_btn: e.target.value,
@@ -200,7 +200,7 @@ export default class Australia extends React.Component {
             console.log("Search by tags: ", searchQuery.data)
         }
         this.setState({
-            search_flag:true,
+            search_flag: true,
         })
 
     }
@@ -221,7 +221,7 @@ export default class Australia extends React.Component {
                             <h5>Address: {i.review_address}</h5>
                         </div>
                         <div className="info-sub-title">
-                            <h6>Location: Australia, {i.city_town} </h6>
+                            <h6>Location: South Korea, {i.city_town} </h6>
                             <h6>Category: {this.reviewCat(i.review_category)}</h6>
                             <h6>Review Type: {this.reviewType(i.review_type)}</h6>
                             <h6>Tags: <span>{this.reviewTags(i.review_tags)}</span></h6>
@@ -243,7 +243,7 @@ export default class Australia extends React.Component {
     render() {
         return (
             <React.Fragment>
-<Container>
+                <Container>
                     <div className="filter-section">
                         <button value="Home" className="filter-btn" onClick={this.filterBtn}>Home</button>
                         <button value="Accommodation" className="filter-btn" onClick={this.filterBtn}>Accommodation</button>

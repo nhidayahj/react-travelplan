@@ -23,6 +23,20 @@ export default class Homepage extends React.Component {
         })
     }
 
+    countryName(name) {
+        if (name === "australia") {
+            return "Australia"
+        } else if (name === "japan") {
+            return "Japan"
+        } else if (name === "korea") {
+            return "South Korea"
+        } else if (name === "taiwan") {
+            return "Taiwan"
+        } else if (name === "thailand") {
+            return "Thailand"
+        }
+    }
+
     renderCountries() {
         let card_country = [];
         for (let i of this.state.all_countries) {
@@ -32,24 +46,13 @@ export default class Homepage extends React.Component {
                     <Card outline color="info" className="card-country">
                         <CardImg className="each-card" top width="100%" src={i.image_url} alt="country image cap" />
                         <CardBody className="each-card-body">
-                            <CardTitle className="text-center" tag="h5">{i.country}</CardTitle>
+                            <CardTitle className="text-center" tag="h5">{this.countryName(i.country)}</CardTitle>
                             {/* <CardSubtitle tag="h6" className="mb-2 text-muted text-center">Card subtitle</CardSubtitle> */}
                             <CardText>{i.best_for}</CardText>
                             <Link to={i.country}><Badge href="#" color="info" pill>explore</Badge></Link>
                         </CardBody>
                     </Card>
                 </Col>
-
-
-                // <Card outline color="info" className="card-country">
-                //     <CardImg className="each-card" top width="100%" src={i.image_url} alt="country image cap" />
-                //     <CardBody className="each-card-body">
-                //         <CardTitle className="text-center" tag="h5">{i.country}</CardTitle>
-                //         {/* <CardSubtitle tag="h6" className="mb-2 text-muted text-center">Card subtitle</CardSubtitle> */}
-                //         <CardText>{i.description}</CardText>
-                //         <Link to={i.country}><Badge href="#" color="info" pill>explore</Badge></Link>
-                //     </CardBody>
-                // </Card>
             )
         }
         return card_country;
@@ -68,9 +71,6 @@ export default class Homepage extends React.Component {
                             <h3 className="page-title">Popular Destination</h3>
                         </div>
                         <div className="country-deck">
-                            {/* <Row>
-                                {this.renderCountries()}
-                            </Row> */}
                             {this.renderCountries()}
                         </div>
                     </div>

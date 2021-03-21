@@ -166,9 +166,10 @@
     justify-content: center;
 }
 
-.update{
+.update, .submit{
     margin-right: 10px;
 }
+
 
 .review-body {
     margin-top: 35px;
