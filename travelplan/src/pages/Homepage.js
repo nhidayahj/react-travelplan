@@ -7,6 +7,7 @@ import {
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 
+
 const baseUrl = "https://3001-tan-dog-b6spunp9.ws-us03.gitpod.io/all"
 
 export default class Homepage extends React.Component {
@@ -74,33 +75,33 @@ export default class Homepage extends React.Component {
                             {this.renderCountries()}
                         </div>
                     </div>
-                    <div className="title-header">
+                    {/* <div className="title-header">
                         <h3 className="page-title">Places & Experiences</h3>
-                    </div>
+                    </div> */}
                 </Container>
 
-                <div className="home-section">
+                {/* <div className="home-section">
                     <div className="experiences">
                         <Row>
                             <Col md="4" lg="4" id="box1" className="overlay">
-                                <Link to="/accommodation"><div className="pic-btn">
+                                <Link to="/plan"><div className="pic-btn">
                                     <div className="text">Accommodation</div>
                                 </div></Link>
                             </Col>
                             <Col md="4" lg="4" id="box2" className="overlay">
-                                <Link to="/restaurant"><div className="pic-btn">
+                                <Link to="/plan"><div className="pic-btn">
                                     <div className="text">Restaurant</div>
                                 </div></Link>
                             </Col>
                             <Col md="4" lg="4" id="box3" className="overlay">
-                                <Link to="/activity"><div className="pic-btn">
+                                <Link to="/plan"><div className="pic-btn">
                                     <div className="text">Activities</div>
                                 </div></Link>
                             </Col>
                         </Row>
                     </div>
 
-                </div>
+                </div> */}
 
 
             </React.Fragment>

@@ -21,7 +21,7 @@ export default class Australia extends React.Component {
         queryCity: "",
         queryTags: "",
         filter_btn: "",
-        search_flag:false,
+        search_flag: false,
         newResult: ""
     }
 
@@ -29,7 +29,7 @@ export default class Australia extends React.Component {
         let response = await axios.get(baseUrl + "/all")
         this.setState({
             all_reviews: response.data[0],
-            country: response.data[1],
+            country: [response.data[1]],
             all_users: response.data[2]
         })
         let all_users = [];
@@ -47,36 +47,22 @@ export default class Australia extends React.Component {
 
 
 
-    renderCountryInfo() {
-        // for (let info of this.state.country) {
-        //     return (
-        //         <div>
-        //             <h3 className="country-name">Australia</h3>
-        //             <div id="page-img-aus">
-        //                 <Container>
-        //                     <div className="country-info">
-        //                         <p>{info.description}</p>
-        //                     </div>
-        //                 </Container>
-        //             </div>
-
-
-        //         </div>
-        //     )
-        // }
-        return (
-            <div>
-                <h3 className="country-name">Australia</h3>
-                <div id="page-img-aus">hello
-                    {/* <Container>
-                        <div className="country-info">
-                            
-                        </div>
-                    </Container> */}
-                </div>
-            </div>
-        )
-    }
+    // renderCountryInfo() {
+    //     let info_accum = [];
+    //     for (let i of this.state.country) {
+    //         info_accum.push(
+    //             <div className="country-header">
+    //                 <h3 className="country-name">Australia</h3>
+    //                 <div className="page-img-header">
+    //                     <div className="country-img">
+    //                         {/* <img src={i.image_url} className="country-img-url" alt="uploaded img"></img> */}
+    //                     </div>
+    //                 </div>
+    //             </div>
+    //         )
+    //     }
+    //     return info_accum;
+    // }
 
     userReview(userId) {
         for (let user of this.state.country_users) {
@@ -236,7 +222,7 @@ export default class Australia extends React.Component {
             console.log("Search by tags: ", searchQuery.data)
         }
         this.setState({
-            search_flag:true,
+            search_flag: true,
         })
 
     }
@@ -279,8 +265,9 @@ export default class Australia extends React.Component {
     render() {
         return (
             <React.Fragment>
-
-                {this.renderCountryInfo()}
+                <div className="page-img-header">
+                    <div className="country-img-aus"></div>
+                </div>
                 <Container>
                     <div className="filter-section">
                         <button value="Home" className="filter-btn" onClick={this.filterBtn}>Home</button>

@@ -1,8 +1,15 @@
 import React from 'react'
 import axios from 'axios'
-import { Container, Row, Col, Form, FormGroup, Label, Input, Button } from 'reactstrap';
+import { Container, Row, Col, Form, FormGroup, Label, Input, Button,
+        Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import {Link} from 'react-router-dom';
+import Australia from './Australia';
+import Japan from './Japan';
+import Korea from './Korea';
+import Taiwan from './Taiwan';
+import Thailand from './Thailand';
+const baseUrl = "https://3001-tan-dog-b6spunp9.ws-us03.gitpod.io";
 
-const baseUrl = "https://3001-tan-dog-b6spunp9.ws-us03.gitpod.io"
 
 export default class CreateReview extends React.Component {
     state = {
@@ -17,7 +24,8 @@ export default class CreateReview extends React.Component {
         reviewDesc: "",
         image: "",
         ratings: "",
-        tags: []
+        tags: [],
+        modal:false
     }
 
     userFill = (e) => {
@@ -62,32 +70,32 @@ export default class CreateReview extends React.Component {
                     <Col>
                         <FormGroup>
                             <legend>Review Description</legend>
-                            <Input type="textarea" name="reviewDesc" value={this.state.reviewDesc} onChange={this.userFill} 
-                            maxLength={300} />
+                            <Input type="textarea" name="reviewDesc" value={this.state.reviewDesc} onChange={this.userFill}
+                                maxLength={300} />
                         </FormGroup>
                     </Col>
                 </Row>
                 <Row>
                     <Col>
                         <FormGroup tag="fieldset">
-                            <legend>Ratings</legend>
-                            <FormGroup check>
-                                <Input type="radio" name="ratings"
-                                    value="poor" onChange={this.userFill} checked={this.state.ratings === "poor"} />
-                                <Label>Poor</Label>
-                            </FormGroup>
-                            <FormGroup check>
-                                <Input type="radio" name="ratings"
-                                    value="satisfactory" onChange={this.userFill} checked={this.state.ratings === "satisfactory"} />
-                                <Label>Satisfactory</Label>
+                                <legend>Ratings</legend>
+                                <FormGroup check>
+                                    <Input type="radio" name="ratings"
+                                        value="poor" onChange={this.userFill} checked={this.state.ratings === "poor"} />
+                                    <Label>Poor</Label>
+                                </FormGroup>
+                                <FormGroup check>
+                                    <Input type="radio" name="ratings"
+                                        value="satisfactory" onChange={this.userFill} checked={this.state.ratings === "satisfactory"} />
+                                    <Label>Satisfactory</Label>
 
+                                </FormGroup>
+                                <FormGroup check>
+                                    <Input type="radio" name="ratings"
+                                        value="excellent" onChange={this.userFill} checked={this.state.ratings === "excellent"} />
+                                    <Label>Excellent</Label>
+                                </FormGroup>
                             </FormGroup>
-                            <FormGroup check>
-                                <Input type="radio" name="ratings"
-                                    value="excellent" onChange={this.userFill} checked={this.state.ratings === "excellent"} />
-                                <Label>Excellent</Label>
-                            </FormGroup>
-                        </FormGroup>
                     </Col>
                 </Row>
                 <Row>
@@ -103,13 +111,48 @@ export default class CreateReview extends React.Component {
                         </FormGroup>
                     </Col>
                 </Row>
+                <Row>
+                    <Col>
+                        <FormGroup>
+                            <legend>Username</legend>
+                            <Input
+                                type="text"
+                                name="username"
+                                value={this.state.username}
+                                onChange={this.userFill}
+                            />
+                        </FormGroup>
+                    </Col>
+                </Row>
 
                 <div className="review-form-btns">
                     <Button className="submit" color="primary" onClick={this.submitReview}>Submit</Button>{' '}
-                    <Button color="danger" onClick={this.deletePost}>Cancel</Button>
+                    <Link to="/"><Button color="danger">Cancel</Button></Link>
                 </div>
             </React.Fragment>
         )
+    }
+
+    toggle = () => {
+        this.setState({
+            'modal':!this.state.modal
+        })
+    }
+
+    displayConfirm() {
+        return (
+            <React.Fragment>
+                <div>
+                    <Modal isOpen={this.state.modal} toggle={this.toggle}>
+                        <ModalHeader toggle={this.toggle}>Modal title</ModalHeader>
+                        <ModalBody>Thank you for sharing your reviews!</ModalBody>
+                        <ModalFooter>
+                            <Button color="primary" onClick={this.toggle}>Share</Button>{' '}
+                            <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+                        </ModalFooter>
+                    </Modal>
+                </div>
+            </React.Fragment>)
     }
 
 
@@ -128,10 +171,15 @@ export default class CreateReview extends React.Component {
             reviewDesc: this.state.reviewDesc,
             imageLink: this.state.image,
             ratings: this.state.ratings,
-
         })
+        console.log(all_review)
         console.log(all_review.data)
         console.log("review id: ", all_review.data._id)
+
+
+        // if (all_review.status === 200 && this.state.modal === true) {
+        //     {this.displayConfirm()}
+        // }
     }
 
     render() {
@@ -145,6 +193,7 @@ export default class CreateReview extends React.Component {
                                 <FormGroup>
                                     <legend>Country</legend>
                                     <Input type="select" name="country" value={this.state.country} onChange={this.userFill}>
+                                        <option value="select">Select a Country</option>
                                         <option value="Australia">Australia</option>
                                         <option value="Japan">Japan</option>
                                         <option value="Korea">Korea</option>
@@ -517,8 +566,9 @@ export default class CreateReview extends React.Component {
                             {this.templateFields()}
                         </div>
                         {/* End of activity workshop */}
-
                     </Form>
+                    {}
+
                 </Container>
             </React.Fragment >
         )

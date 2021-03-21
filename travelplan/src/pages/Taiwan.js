@@ -221,7 +221,7 @@ export default class Taiwan extends React.Component {
                             <h5>Address: {i.review_address}</h5>
                         </div>
                         <div className="info-sub-title">
-                            <h6>Location: Australia, {i.city_town} </h6>
+                            <h6>Location: Taiwan, {i.city_town} </h6>
                             <h6>Category: {this.reviewCat(i.review_category)}</h6>
                             <h6>Review Type: {this.reviewType(i.review_type)}</h6>
                             <h6>Tags: <span>{this.reviewTags(i.review_tags)}</span></h6>
@@ -243,6 +243,9 @@ export default class Taiwan extends React.Component {
     render() {
         return (
             <React.Fragment>
+                <div className="page-img-header">
+                    <div className="country-img-tai"></div>
+                </div>
                <Container>
                     <div className="filter-section">
                         <button value="Home" className="filter-btn" onClick={this.filterBtn}>Home</button>

@@ -48,7 +48,6 @@ export default class ShowReview extends React.Component {
     updateForm = (e) => {
         this.setState({
             [e.target.name]: e.target.value
-
         })
     }
 
