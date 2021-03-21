@@ -14,33 +14,34 @@ const baseUrl = "https://3001-tan-dog-b6spunp9.ws-us03.gitpod.io/australia";
 
 export default class Australia extends React.Component {
     state = {
-        aus_reviews: [],
+        all_reviews: [],
         country: [],
-        all_users: [],
-        aus_users: [],
+        users: [],
+        country_users: [],
         queryCity: "",
         queryTags: "",
         filter_btn: "",
+        search_flag:false,
         newResult: ""
     }
 
     async componentDidMount() {
         let response = await axios.get(baseUrl + "/all")
         this.setState({
-            aus_reviews: response.data[0],
+            all_reviews: response.data[0],
             country: response.data[1],
             all_users: response.data[2]
         })
-        let aus_user = [];
+        let all_users = [];
         for (let user of this.state.all_users) {
-            for (let review of this.state.aus_reviews) {
+            for (let review of this.state.all_reviews) {
                 if (user._id === review.user) {
-                    aus_user.push(user)
+                    all_users.push(user)
                 }
             }
         }
         this.setState({
-            aus_users: aus_user
+            country_users: all_users
         })
     }
 
@@ -78,7 +79,7 @@ export default class Australia extends React.Component {
     }
 
     userReview(userId) {
-        for (let user of this.state.aus_users) {
+        for (let user of this.state.country_users) {
             if (user._id === userId) {
                 return user.username
             }
@@ -112,7 +113,7 @@ export default class Australia extends React.Component {
 
     renderAllReview() {
         let aus_accum = [];
-        for (let i of this.state.aus_reviews) {
+        for (let i of this.state.all_reviews) {
             let obj = { review_id: i._id, country_id: i.country };
             aus_accum.push(
                 <div key={i._id} className="filter-result">
@@ -146,7 +147,8 @@ export default class Australia extends React.Component {
 
     filterBtn = (e) => {
         this.setState({
-            filter_btn: e.target.value
+            filter_btn: e.target.value,
+            search_flag: false
         })
     }
 
@@ -163,7 +165,7 @@ export default class Australia extends React.Component {
     filterDisplay() {
         let filter_accum = [];
         let heading;
-        for (let i of this.state.aus_reviews) {
+        for (let i of this.state.all_reviews) {
             if (i.review_category === this.state.filter_btn) {
                 let obj = { review_id: i._id, country_id: i.country };
                 heading = this.filterDisplayTitle()
@@ -233,6 +235,10 @@ export default class Australia extends React.Component {
             })
             console.log("Search by tags: ", searchQuery.data)
         }
+        this.setState({
+            search_flag:true,
+        })
+
     }
 
     renderUserSearch = () => {
@@ -302,12 +308,6 @@ export default class Australia extends React.Component {
                                         name="queryTags" value={this.state.queryBox} onChange={this.querySearch} />
                                 </InputGroup>
                             </Col>
-                            {/* <Col md="4" sm="4">
-                                <InputGroup>
-                                    <Input placeholder="search by reviewer .."
-                                        name="queryReviewer" value={this.state.queryBox} onChange={this.querySearch} />
-                                </InputGroup>
-                            </Col> */}
                         </Row>
                         <div>
                             <Button color="info" className="page-search-btn" onClick={this.userSearch}>Search</Button>
@@ -316,29 +316,27 @@ export default class Australia extends React.Component {
 
                     <div style={{
                         display: (this.state.filter_btn === "Home" || this.state.filter_btn === "")
-                            && this.state.newResult === "" ? 'block' : 'none'
+                            && this.state.search_flag === false ? 'block' : 'none'
                     }}
                         className="all-reviews">
                         <h3 className="page-title-display">Our Reviews</h3>
                         {this.renderAllReview()}
                     </div>
                     <div style={{
-                        display: this.state.filter_btn === "Accommodation" || this.state.filter_btn === "Restaurant"
-                            || this.state.filter_btn === "Activities"
+                        display: (this.state.filter_btn === "Accommodation" || this.state.filter_btn === "Restaurant"
+                            || this.state.filter_btn === "Activities") && this.state.search_flag === false
                             ? 'block' : 'none'
                     }}>
                         {this.filterDisplay().heading}
                         {this.filterDisplay().filter_accum}
 
                     </div>
-                    <div style={{ display: this.state.newResult !== "" ? "block" : "none" }}>
+                    <div style={{ display: this.state.search_flag === true ? "block" : "none" }}>
                         <h3 className="page-title-display">Search Result(s)</h3>
                         {this.renderUserSearch()}
                     </div>
 
                 </Container>
-
-
             </React.Fragment>
         )
     }
