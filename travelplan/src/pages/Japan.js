@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import {
     Container, Row, Col, Input, InputGroup,
-    Button,Badge
+    Button, Badge
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
@@ -17,7 +17,7 @@ export default class Japan extends React.Component {
         queryCity: "",
         queryTags: "",
         filter_btn: "",
-        search_flag:false,
+        search_flag: false,
         newResult: ""
     }
 
@@ -197,47 +197,56 @@ export default class Japan extends React.Component {
             console.log("Search by tags: ", searchQuery.data)
         }
         this.setState({
-            search_flag:true,
+            search_flag: true,
         })
 
     }
 
     renderUserSearch = () => {
         let search_accum = [];
-        for (let i of this.state.newResult) {
-            let obj = { review_id: i._id, country_id: i.country };
-            // heading = this.filterDisplayTitle()
-            search_accum.push(
-                <div key={i._id} className="filter-result">
-                    <div className="filter-img">
-                        <img src={i.image_link} className="filter-img-link" alt="uploaded img"></img>
-                    </div>
-                    <div className="filter-info">
-                        <div className="info-title">
-                            <h5>Name: {i.name_of_place}</h5>
-                            <h5>Address: {i.review_address}</h5>
+        if (this.state.newResult.length > 0) {
+            let noOfSearch = this.state.newResult.length;
+            let title = <h3 className="page-title-display">{noOfSearch} Search Result(s)</h3>
+            for (let i of this.state.newResult) {
+                let obj = { review_id: i._id, country_id: i.country };
+                // heading = this.filterDisplayTitle()
+                search_accum.push(
+                    <div key={i._id} className="filter-result">
+                        <div className="filter-img">
+                            <img src={i.image_link} className="filter-img-link" alt="uploaded img"></img>
                         </div>
-                        <div className="info-sub-title">
-                            <h6>Location: Australia, {i.city_town} </h6>
-                            <h6>Category: {this.reviewCat(i.review_category)}</h6>
-                            <h6>Review Type: {this.reviewType(i.review_type)}</h6>
-                            <h6>Tags: <span>{this.reviewTags(i.review_tags)}</span></h6>
+                        <div className="filter-info">
+                            <div className="info-title">
+                                <h5>Name: {i.name_of_place}</h5>
+                                <h5>Address: {i.review_address}</h5>
+                            </div>
+                            <div className="info-sub-title">
+                                <h6>Location: Japan, {i.city_town} </h6>
+                                <h6>Category: {this.reviewCat(i.review_category)}</h6>
+                                <h6>Review Type: {this.reviewType(i.review_type)}</h6>
+                                <h6>Tags: <span>{this.reviewTags(i.review_tags)}</span></h6>
+                            </div>
+                            <div className="info">
+                                <div className="review-desc"><p>"{i.review_desc}"</p></div>
+                            </div>
+                            <div className="reviewed-by"><p>Reviewed by: {this.userReview(i.user)}</p></div>
+                            <div className="info-btns">
+                                <div><Link to={{ pathname: "/edit", state: obj }}>
+                                    <Button outline color="primary" size="sm" className="info-edit-btns">Edit</Button></Link></div>
+                            </div>
                         </div>
-                        <div className="info">
-                            <div className="review-desc"><p>"{i.review_desc}"</p></div>
-                        </div>
-                        <div className="reviewed-by"><p>Reviewed by: {this.userReview(i.user)}</p></div>
-                        <div className="info-btns">
-                            <div><Link to={{ pathname: "/edit", state: obj }}>
-                                <Button outline color="primary" size="sm" className="info-edit-btns">Edit</Button></Link></div>
-                        </div>
-                    </div>
-                </div>)
+                    </div>)
+            }
+            return {title,search_accum};
+        } else {
+            let noOfSearch = this.state.newResult.length
+            let title = <h3 className="page-title-display">{noOfSearch} Search Result(s)</h3>
+            return { title }
         }
-        return search_accum;
+
     }
 
-    
+
 
 
     render() {
@@ -246,7 +255,7 @@ export default class Japan extends React.Component {
                 <div className="page-img-header">
                     <div className="country-img-jap"></div>
                 </div>
-               <Container>
+                <Container>
                     <div className="filter-section">
                         <button value="Home" className="filter-btn" onClick={this.filterBtn}>Home</button>
                         <button value="Accommodation" className="filter-btn" onClick={this.filterBtn}>Accommodation</button>
@@ -297,8 +306,9 @@ export default class Japan extends React.Component {
 
                     </div>
                     <div style={{ display: this.state.search_flag === true ? "block" : "none" }}>
-                        <h3 className="page-title-display">Search Result(s)</h3>
-                        {this.renderUserSearch()}
+   
+                        {this.renderUserSearch().title}
+                        {this.renderUserSearch().search_accum}
                     </div>
 
                 </Container>

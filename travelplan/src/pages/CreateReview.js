@@ -1,13 +1,9 @@
 import React from 'react'
 import axios from 'axios'
-import { Container, Row, Col, Form, FormGroup, Label, Input, Button,
-        Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import {Link} from 'react-router-dom';
-import Australia from './Australia';
-import Japan from './Japan';
-import Korea from './Korea';
-import Taiwan from './Taiwan';
-import Thailand from './Thailand';
+import { Container, Row, Col, Form, FormGroup, Label, Input, Button } from 'reactstrap';
+import { Link, Redirect } from 'react-router-dom';
+import Homepage from './Homepage';
+
 const baseUrl = "https://3001-tan-dog-b6spunp9.ws-us03.gitpod.io";
 
 
@@ -25,7 +21,7 @@ export default class CreateReview extends React.Component {
         image: "",
         ratings: "",
         tags: [],
-        modal:false
+
     }
 
     userFill = (e) => {
@@ -71,31 +67,31 @@ export default class CreateReview extends React.Component {
                         <FormGroup>
                             <legend>Review Description</legend>
                             <Input type="textarea" name="reviewDesc" value={this.state.reviewDesc} onChange={this.userFill}
-                                maxLength={300} />
+                                placeholder="be descriptive as possible!" maxLength={300} />
                         </FormGroup>
                     </Col>
                 </Row>
                 <Row>
                     <Col>
                         <FormGroup tag="fieldset">
-                                <legend>Ratings</legend>
-                                <FormGroup check>
-                                    <Input type="radio" name="ratings"
-                                        value="poor" onChange={this.userFill} checked={this.state.ratings === "poor"} />
-                                    <Label>Poor</Label>
-                                </FormGroup>
-                                <FormGroup check>
-                                    <Input type="radio" name="ratings"
-                                        value="satisfactory" onChange={this.userFill} checked={this.state.ratings === "satisfactory"} />
-                                    <Label>Satisfactory</Label>
-
-                                </FormGroup>
-                                <FormGroup check>
-                                    <Input type="radio" name="ratings"
-                                        value="excellent" onChange={this.userFill} checked={this.state.ratings === "excellent"} />
-                                    <Label>Excellent</Label>
-                                </FormGroup>
+                            <legend>Ratings</legend>
+                            <FormGroup check>
+                                <Input type="radio" name="ratings"
+                                    value="poor" onChange={this.userFill} checked={this.state.ratings === "poor"} />
+                                <Label>Poor</Label>
                             </FormGroup>
+                            <FormGroup check>
+                                <Input type="radio" name="ratings"
+                                    value="satisfactory" onChange={this.userFill} checked={this.state.ratings === "satisfactory"} />
+                                <Label>Satisfactory</Label>
+
+                            </FormGroup>
+                            <FormGroup check>
+                                <Input type="radio" name="ratings"
+                                    value="excellent" onChange={this.userFill} checked={this.state.ratings === "excellent"} />
+                                <Label>Excellent</Label>
+                            </FormGroup>
+                        </FormGroup>
                     </Col>
                 </Row>
                 <Row>
@@ -133,27 +129,23 @@ export default class CreateReview extends React.Component {
         )
     }
 
-    toggle = () => {
-        this.setState({
-            'modal':!this.state.modal
-        })
+    redirectPage() {
+
     }
 
-    displayConfirm() {
-        return (
-            <React.Fragment>
-                <div>
-                    <Modal isOpen={this.state.modal} toggle={this.toggle}>
-                        <ModalHeader toggle={this.toggle}>Modal title</ModalHeader>
-                        <ModalBody>Thank you for sharing your reviews!</ModalBody>
-                        <ModalFooter>
-                            <Button color="primary" onClick={this.toggle}>Share</Button>{' '}
-                            <Button color="secondary" onClick={this.toggle}>Cancel</Button>
-                        </ModalFooter>
-                    </Modal>
-                </div>
-            </React.Fragment>)
-    }
+    // displayConfirm(status) {
+    //     if (status === true) {
+    //         return (
+    //             <React.Fragment>
+    //                 <h3 className="page-title-display">Thank you for sharing!</h3>
+    //                 <Link to="/"><Button color="success" size="sm">Ok!</Button></Link>
+    //             </React.Fragment>)
+    //     } else if (status === false) {
+    //         return (
+                
+    //         )
+    //     }
+    // }
 
 
     submitReview = async () => {
@@ -172,404 +164,418 @@ export default class CreateReview extends React.Component {
             imageLink: this.state.image,
             ratings: this.state.ratings,
         })
+        if (all_review.status === 200) {
+            this.setState({
+                status: true
+            })
+        } else {
+            this.setState({
+                status: false
+            })
+        }
+        // this.displayConfirm(all_review.status);
+
         console.log(all_review)
         console.log(all_review.data)
         console.log("review id: ", all_review.data._id)
 
-
-        // if (all_review.status === 200 && this.state.modal === true) {
-        //     {this.displayConfirm()}
-        // }
     }
 
     render() {
         return (
             <React.Fragment>
-                <Container className="review-body">
-                    <h2 className="page-title">Create a Review</h2>
-                    <Form>
-                        <Row>
-                            <Col sm="4" md="6">
-                                <FormGroup>
-                                    <legend>Country</legend>
-                                    <Input type="select" name="country" value={this.state.country} onChange={this.userFill}>
-                                        <option value="select">Select a Country</option>
-                                        <option value="Australia">Australia</option>
-                                        <option value="Japan">Japan</option>
-                                        <option value="Korea">Korea</option>
-                                        <option value="Taiwan">Taiwan</option>
-                                        <option value="Thailand">Thailand</option>
-                                    </Input>
-                                </FormGroup>
-                            </Col>
-                            <Col sm="4" md="6">
-                                <FormGroup>
-                                    <legend>City / Town</legend>
-                                    <Input type="text" name="city" value={this.state.city} onChange={this.userFill} placeholder="City" />
-                                </FormGroup>
-                            </Col>
-                        </Row>
-
-
-                        {/* Experience List */}
-                        <Row>
-                            <Col>
-                                <FormGroup>
-                                    <legend>Review Category</legend>
-                                    <Input type="select" name="reviewCategory" value={this.state.reviewCategory} onChange={this.userFill}>
-                                        <option value="select">Select Category</option>
-                                        <option value="Accommodation">Accommodation</option>
-                                        <option value="Restaurant">Restaurant</option>
-                                        <option value="Activities">Activities</option>
-                                    </Input>
-                                </FormGroup>
-                            </Col>
-                        </Row>
-
-                        {/* Acccommodation Details */}
-                        <div style={{ display: this.displayActivities() === "Accommodation" ? 'block' : 'none' }}>
-
-
-                            <FormGroup tag="fieldset">
-                                <legend>Accommodation Type</legend>
-                                <FormGroup check>
-                                    <Input type="radio" name="reviewType"
-                                        value="hotel" onChange={this.userFill} checked={this.state.reviewType === "hotel"} />
-                                    <Label>Hotel</Label>
-                                </FormGroup>
-                                <FormGroup check>
-                                    <Input type="radio" name="reviewType"
-                                        value="airbnb" onChange={this.userFill} checked={this.state.reviewType === "airbnb"} />
-                                    <Label>Airbnb</Label>
-
-                                </FormGroup>
-                                <FormGroup check>
-                                    <Input type="radio" name="reviewType"
-                                        value="hostel" onChange={this.userFill} checked={this.state.reviewType === "hostel"} />
-                                    <Label>Hostel</Label>
-                                </FormGroup>
-                            </FormGroup>
-                            <Row>
-                                <Col>
-                                    <legend>Accommodation Details</legend>
-                                </Col>
-                            </Row>
+                <div>
+                    <Container className="review-body">
+                        <h2 className="page-title">Create a Review</h2>
+                        <Form>
                             <Row>
                                 <Col sm="4" md="6">
                                     <FormGroup>
-                                        <Label>Name of Building</Label>
-                                        <Input type="text" name="nameOfPlace"
-                                            value={this.state.nameOfPlace} onChange={this.userFill} />
+                                        <legend>Country</legend>
+                                        <Input type="select" name="country" value={this.state.country} onChange={this.userFill}>
+                                            <option value="select">Select a Country</option>
+                                            <option value="Australia">Australia</option>
+                                            <option value="Japan">Japan</option>
+                                            <option value="Korea">Korea</option>
+                                            <option value="Taiwan">Taiwan</option>
+                                            <option value="Thailand">Thailand</option>
+                                        </Input>
                                     </FormGroup>
                                 </Col>
                                 <Col sm="4" md="6">
                                     <FormGroup>
-                                        <Label>Address</Label>
-                                        <Input type="text" name="address"
-                                            value={this.state.address} onChange={this.userFill} />
+                                        <legend>City / Town</legend>
+                                        <Input type="text" name="city" value={this.state.city} onChange={this.userFill} placeholder="City" />
                                     </FormGroup>
                                 </Col>
                             </Row>
+
+
+                            {/* Experience List */}
                             <Row>
                                 <Col>
-                                    <legend>Accommodation Facilities</legend>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col sm="4">
-                                    <FormGroup check inline>
-                                        <Input type="checkbox" name="tags" value="room-service" onChange={this.tagList}
-                                            checked={this.state.tags.includes("room-service")} />
-                                        <Label check>Room Service</Label>
-                                    </FormGroup>
-                                </Col>
-                                <Col sm="4">
-                                    <FormGroup check inline>
-                                        <Input type="checkbox" name="tags" value="wifi" onChange={this.tagList}
-                                            checked={this.state.tags.includes("wifi")} />
-                                        <Label check>Free Wifi</Label>
-                                    </FormGroup>
-                                </Col>
-                                <Col sm="4">
-                                    <FormGroup check inline>
-                                        <Input type="checkbox" name="tags" value="breakfast" onChange={this.tagList}
-                                            checked={this.state.tags.includes("breakfast")} />
-                                        <Label check>All-Day Breakfast</Label>
-                                    </FormGroup>
-                                </Col>
-                                <Col sm="4">
-                                    <FormGroup check inline>
-                                        <Input type="checkbox" name="tags" value="deals" onChange={this.tagList}
-                                            checked={this.state.tags.includes("deals")} />
-                                        <Label check>Accommodation Deals</Label>
-                                    </FormGroup>
-                                </Col>
-                                <Col sm="4">
-                                    <FormGroup check inline>
-                                        <Input type="checkbox" name="tags" value="gym" onChange={this.tagList}
-                                            checked={this.state.tags.includes("gym")} />
-                                        <Label check>Gym Center</Label>
-                                    </FormGroup>
-                                </Col>
-                                <Col sm="4">
-                                    <FormGroup check inline>
-                                        <Input type="checkbox" name="tags" value="non-smoking-rooms" onChange={this.tagList}
-                                            checked={this.state.tags.includes("non-smoking-rooms")} />
-                                        <Label check>Non-Smoking Rooms</Label>
-                                    </FormGroup>
-                                </Col>
-                            </Row>
-                            {this.templateFields()}
-                        </div>
-                        {/* End of Accommodation */}
-
-                        <div style={{ display: this.displayActivities() === "Restaurant" ? 'block' : 'none' }}>
-
-                            {/* Restaurant Details */}
-                            <FormGroup tag="fieldset">
-                                <legend>Restaurant Mood</legend>
-                                <FormGroup check>
-                                    <Input type="radio" name="reviewType"
-                                        value="fine-dining" onChange={this.userFill} checked={this.state.reviewType === "fine-dining"} />
-                                    <Label>Fine Dining</Label>
-                                </FormGroup>
-                                <FormGroup check>
-                                    <Input type="radio" name="reviewType"
-                                        value="casual-dining" onChange={this.userFill} checked={this.state.reviewType === "casual-dining"} />
-                                    <Label>Casual Dining</Label>
-
-                                </FormGroup>
-                                <FormGroup check>
-                                    <Input type="radio" name="reviewType"
-                                        value="street-food" onChange={this.userFill} checked={this.state.reviewType === "street-food"} />
-                                    <Label>Street Food</Label>
-                                </FormGroup>
-                            </FormGroup>
-                            <Row>
-                                <Col>
-                                    <legend>Restaurant Details</legend>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col sm="4" md="6">
                                     <FormGroup>
-                                        <Label>Name of Building</Label>
-                                        <Input type="text" name="nameOfPlace"
-                                            value={this.state.nameOfPlace} onChange={this.userFill} />
-                                    </FormGroup>
-                                </Col>
-                                <Col sm="4" md="6">
-                                    <FormGroup>
-                                        <Label>Location</Label>
-                                        <Input type="text" name="address"
-                                            value={this.state.address} onChange={this.userFill} />
-                                    </FormGroup>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col>
-                                    <legend>Service Available</legend>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col sm="4">
-                                    <FormGroup check inline>
-                                        <Input type="checkbox" name="tags" value="dine-in" onChange={this.tagList}
-                                            checked={this.state.tags.includes("dine-in")} />
-                                        <Label check>Dine-In</Label>
-                                    </FormGroup>
-                                </Col>
-                                <Col sm="4">
-                                    <FormGroup check inline>
-                                        <Input type="checkbox" name="tags" value="takeaway" onChange={this.tagList}
-                                            checked={this.state.tags.includes("takeaway")} />
-                                        <Label check>Takeaway</Label>
-                                    </FormGroup>
-                                </Col>
-                                <Col sm="4">
-                                    <FormGroup check inline>
-                                        <Input type="checkbox" name="tags" value="drive-thru" onChange={this.tagList}
-                                            checked={this.state.tags.includes("drive-thru")} />
-                                        <Label check>Drive-Thru</Label>
-                                    </FormGroup>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col>
-                                    <legend>Menu Type</legend>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col sm="4">
-                                    <FormGroup check inline>
-                                        <Input type="checkbox" name="tags" value="fusion" onChange={this.tagList}
-                                            checked={this.state.tags.includes("fusion")} />
-                                        <Label check>Fusion</Label>
-                                    </FormGroup>
-                                </Col>
-                                <Col sm="4">
-                                    <FormGroup check inline>
-                                        <Input type="checkbox" name="tags" value="western" onChange={this.tagList}
-                                            checked={this.state.tags.includes("western")} />
-                                        <Label check>Western</Label>
-                                    </FormGroup>
-                                </Col>
-
-                                <Col sm="4">
-                                    <FormGroup check inline>
-                                        <Input type="checkbox" name="tags" value="dessert" onChange={this.tagList}
-                                            checked={this.state.tags.includes("dessert")} />
-                                        <Label check>Dessert</Label>
+                                        <legend>Review Category</legend>
+                                        <Input type="select" name="reviewCategory" value={this.state.reviewCategory} onChange={this.userFill}>
+                                            <option value="select">Select Category</option>
+                                            <option value="Accommodation">Accommodation</option>
+                                            <option value="Restaurant">Restaurant</option>
+                                            <option value="Activities">Activities</option>
+                                        </Input>
                                     </FormGroup>
                                 </Col>
                             </Row>
 
-                            {this.templateFields()}
-                        </div>
-                        {/* End of restaurant */}
+                            {/* Acccommodation Details */}
+                            <div style={{ display: this.displayActivities() === "Accommodation" ? 'block' : 'none' }}>
 
-                        <div style={{ display: this.displayActivities() === 'Activities' ? 'block' : 'none' }}>
-                            {/* type of activities */}
-                            <FormGroup tag="fieldset">
-                                <legend>Travel Activities</legend>
-                                <FormGroup check>
-                                    <Input type="radio" name="reviewType"
-                                        value="outdoor" onChange={this.userFill} checked={this.state.reviewType === "outdoor"} />
-                                    <Label>Outdoor Activities</Label>
+
+                                <FormGroup tag="fieldset">
+                                    <legend>Accommodation Type</legend>
+                                    <FormGroup check>
+                                        <Input type="radio" name="reviewType"
+                                            value="hotel" onChange={this.userFill} checked={this.state.reviewType === "hotel"} />
+                                        <Label>Hotel</Label>
+                                    </FormGroup>
+                                    <FormGroup check>
+                                        <Input type="radio" name="reviewType"
+                                            value="airbnb" onChange={this.userFill} checked={this.state.reviewType === "airbnb"} />
+                                        <Label>Airbnb</Label>
+
+                                    </FormGroup>
+                                    <FormGroup check>
+                                        <Input type="radio" name="reviewType"
+                                            value="hostel" onChange={this.userFill} checked={this.state.reviewType === "hostel"} />
+                                        <Label>Hostel</Label>
+                                    </FormGroup>
                                 </FormGroup>
-                                <FormGroup check>
-                                    <Input type="radio" name="reviewType"
-                                        value="cultural" onChange={this.userFill} checked={this.state.reviewType === "cultural"} />
-                                    <Label>Cultural Workshop</Label>
-
-                                </FormGroup>
-                                <FormGroup check>
-                                    <Input type="radio" name="reviewType"
-                                        value="arts" onChange={this.userFill} checked={this.state.reviewType === "arts"} />
-                                    <Label>Arts & Crafts</Label>
-                                </FormGroup>
-                            </FormGroup>
-
-                            <div style={{ display: this.state.reviewType === "outdoor" ? "block" : 'none' }}>
                                 <Row>
                                     <Col>
-                                        <legend>Outdoor Adventure</legend>
+                                        <legend>Accommodation Details</legend>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col sm="4" md="6">
+                                        <FormGroup>
+                                            <Label>Name of Building</Label>
+                                            <Input type="text" name="nameOfPlace"
+                                                value={this.state.nameOfPlace} onChange={this.userFill} />
+                                        </FormGroup>
+                                    </Col>
+                                    <Col sm="4" md="6">
+                                        <FormGroup>
+                                            <Label>Address</Label>
+                                            <Input type="text" name="address"
+                                                value={this.state.address} onChange={this.userFill} />
+                                        </FormGroup>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col>
+                                        <legend>Accommodation Facilities</legend>
                                     </Col>
                                 </Row>
                                 <Row>
                                     <Col sm="4">
                                         <FormGroup check inline>
-                                            <Input type="checkbox" name="tags" value="camping" onChange={this.tagList}
-                                                checked={this.state.tags.includes("camping")} />
-                                            <Label check>Camping</Label>
+                                            <Input type="checkbox" name="tags" value="room-service" onChange={this.tagList}
+                                                checked={this.state.tags.includes("room-service")} />
+                                            <Label check>Room Service</Label>
                                         </FormGroup>
                                     </Col>
                                     <Col sm="4">
                                         <FormGroup check inline>
-                                            <Input type="checkbox" name="tags" value="hiking" onChange={this.tagList}
-                                                checked={this.state.tags.includes("hiking")} />
-                                            <Label check>Hiking</Label>
+                                            <Input type="checkbox" name="tags" value="wifi" onChange={this.tagList}
+                                                checked={this.state.tags.includes("wifi")} />
+                                            <Label check>Free Wifi</Label>
                                         </FormGroup>
                                     </Col>
                                     <Col sm="4">
                                         <FormGroup check inline>
-                                            <Input type="checkbox" name="tags" value="sky-diving" onChange={this.tagList}
-                                                checked={this.state.tags.includes("sky-diving")} />
-                                            <Label check>Sky-Diving</Label>
+                                            <Input type="checkbox" name="tags" value="breakfast" onChange={this.tagList}
+                                                checked={this.state.tags.includes("breakfast")} />
+                                            <Label check>All-Day Breakfast</Label>
+                                        </FormGroup>
+                                    </Col>
+                                    <Col sm="4">
+                                        <FormGroup check inline>
+                                            <Input type="checkbox" name="tags" value="deals" onChange={this.tagList}
+                                                checked={this.state.tags.includes("deals")} />
+                                            <Label check>Accommodation Deals</Label>
+                                        </FormGroup>
+                                    </Col>
+                                    <Col sm="4">
+                                        <FormGroup check inline>
+                                            <Input type="checkbox" name="tags" value="gym" onChange={this.tagList}
+                                                checked={this.state.tags.includes("gym")} />
+                                            <Label check>Gym Center</Label>
+                                        </FormGroup>
+                                    </Col>
+                                    <Col sm="4">
+                                        <FormGroup check inline>
+                                            <Input type="checkbox" name="tags" value="non-smoking-rooms" onChange={this.tagList}
+                                                checked={this.state.tags.includes("non-smoking-rooms")} />
+                                            <Label check>Non-Smoking Rooms</Label>
                                         </FormGroup>
                                     </Col>
                                 </Row>
+                                {this.templateFields()}
                             </div>
-                            <div style={{ display: this.state.reviewType === "cultural" ? "block" : 'none' }}>
+                            {/* End of Accommodation */}
+
+                            <div style={{ display: this.displayActivities() === "Restaurant" ? 'block' : 'none' }}>
+
+                                {/* Restaurant Details */}
+                                <FormGroup tag="fieldset">
+                                    <legend>Restaurant Mood</legend>
+                                    <FormGroup check>
+                                        <Input type="radio" name="reviewType"
+                                            value="fine-dining" onChange={this.userFill} checked={this.state.reviewType === "fine-dining"} />
+                                        <Label>Fine Dining</Label>
+                                    </FormGroup>
+                                    <FormGroup check>
+                                        <Input type="radio" name="reviewType"
+                                            value="casual-dining" onChange={this.userFill} checked={this.state.reviewType === "casual-dining"} />
+                                        <Label>Casual Dining</Label>
+
+                                    </FormGroup>
+                                    <FormGroup check>
+                                        <Input type="radio" name="reviewType"
+                                            value="street-food" onChange={this.userFill} checked={this.state.reviewType === "street-food"} />
+                                        <Label>Street Food</Label>
+                                    </FormGroup>
+                                </FormGroup>
                                 <Row>
                                     <Col>
-                                        <legend>Cultural Immersion</legend>
+                                        <legend>Restaurant Details</legend>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col sm="4" md="6">
+                                        <FormGroup>
+                                            <Label>Name of Building</Label>
+                                            <Input type="text" name="nameOfPlace"
+                                                value={this.state.nameOfPlace} onChange={this.userFill} />
+                                        </FormGroup>
+                                    </Col>
+                                    <Col sm="4" md="6">
+                                        <FormGroup>
+                                            <Label>Location</Label>
+                                            <Input type="text" name="address"
+                                                value={this.state.address} onChange={this.userFill} />
+                                        </FormGroup>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col>
+                                        <legend>Service Available</legend>
                                     </Col>
                                 </Row>
                                 <Row>
                                     <Col sm="4">
                                         <FormGroup check inline>
-                                            <Input type="checkbox" name="tags" value="ethnic" onChange={this.tagList}
-                                                checked={this.state.tags.includes("ethnic")} />
-                                            <Label check>Cultural Exchange</Label>
+                                            <Input type="checkbox" name="tags" value="dine-in" onChange={this.tagList}
+                                                checked={this.state.tags.includes("dine-in")} />
+                                            <Label check>Dine-In</Label>
                                         </FormGroup>
                                     </Col>
                                     <Col sm="4">
                                         <FormGroup check inline>
-                                            <Input type="checkbox" name="tags" value="cooking" onChange={this.tagList}
-                                                checked={this.state.tags.includes("cooking")} />
-                                            <Label check>Local Cooking Class</Label>
+                                            <Input type="checkbox" name="tags" value="takeaway" onChange={this.tagList}
+                                                checked={this.state.tags.includes("takeaway")} />
+                                            <Label check>Takeaway</Label>
                                         </FormGroup>
                                     </Col>
                                     <Col sm="4">
                                         <FormGroup check inline>
-                                            <Input type="checkbox" name="tags" value="sport" onChange={this.tagList}
-                                                checked={this.state.tags.includes("sport")} />
-                                            <Label check>Local Sport Activity</Label>
+                                            <Input type="checkbox" name="tags" value="drive-thru" onChange={this.tagList}
+                                                checked={this.state.tags.includes("drive-thru")} />
+                                            <Label check>Drive-Thru</Label>
                                         </FormGroup>
                                     </Col>
                                 </Row>
-                            </div>
-                            <div style={{ display: this.state.reviewType === "arts" ? "block" : 'none' }}>
                                 <Row>
                                     <Col>
-                                        <legend>Arts & Crafts</legend>
+                                        <legend>Menu Type</legend>
                                     </Col>
                                 </Row>
                                 <Row>
                                     <Col sm="4">
                                         <FormGroup check inline>
-                                            <Input type="checkbox" name="tags" value="pottery" onChange={this.tagList}
-                                                checked={this.state.tags.includes("pottery")} />
-                                            <Label check>Pottery Making</Label>
+                                            <Input type="checkbox" name="tags" value="fusion" onChange={this.tagList}
+                                                checked={this.state.tags.includes("fusion")} />
+                                            <Label check>Fusion</Label>
                                         </FormGroup>
                                     </Col>
                                     <Col sm="4">
                                         <FormGroup check inline>
-                                            <Input type="checkbox" name="tags" value="kite" onChange={this.tagList}
-                                                checked={this.state.tags.includes("kite")} />
-                                            <Label check>Kite Making</Label>
+                                            <Input type="checkbox" name="tags" value="western" onChange={this.tagList}
+                                                checked={this.state.tags.includes("western")} />
+                                            <Label check>Western</Label>
                                         </FormGroup>
                                     </Col>
+
                                     <Col sm="4">
                                         <FormGroup check inline>
-                                            <Input type="checkbox" name="tags" value="painting" onChange={this.tagList}
-                                                checked={this.state.tags.includes("painting")} />
-                                            <Label check>Cultural Painting</Label>
+                                            <Input type="checkbox" name="tags" value="dessert" onChange={this.tagList}
+                                                checked={this.state.tags.includes("dessert")} />
+                                            <Label check>Dessert</Label>
                                         </FormGroup>
                                     </Col>
                                 </Row>
+
+                                {this.templateFields()}
                             </div>
-                            <Row>
-                                <Col>
-                                    <legend>Activity Details</legend>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col sm="4" md="6">
-                                    <FormGroup>
-                                        <Label>Activity Package</Label>
-                                        <Input type="text" name="nameOfPlace"
-                                            value={this.state.nameOfPlace} onChange={this.userFill} />
-                                    </FormGroup>
-                                </Col>
-                                <Col sm="4" md="6">
-                                    <FormGroup>
-                                        <Label>Location</Label>
-                                        <Input type="text" name="address"
-                                            value={this.state.address} onChange={this.userFill} />
-                                    </FormGroup>
-                                </Col>
-                            </Row>
+                            {/* End of restaurant */}
 
-                            {/* Description */}
-                            {this.templateFields()}
-                        </div>
-                        {/* End of activity workshop */}
-                    </Form>
-                    {}
+                            <div style={{ display: this.displayActivities() === 'Activities' ? 'block' : 'none' }}>
+                                {/* type of activities */}
+                                <FormGroup tag="fieldset">
+                                    <legend>Travel Activities</legend>
+                                    <FormGroup check>
+                                        <Input type="radio" name="reviewType"
+                                            value="outdoor" onChange={this.userFill} checked={this.state.reviewType === "outdoor"} />
+                                        <Label>Outdoor Activities</Label>
+                                    </FormGroup>
+                                    <FormGroup check>
+                                        <Input type="radio" name="reviewType"
+                                            value="cultural" onChange={this.userFill} checked={this.state.reviewType === "cultural"} />
+                                        <Label>Cultural Workshop</Label>
 
-                </Container>
+                                    </FormGroup>
+                                    <FormGroup check>
+                                        <Input type="radio" name="reviewType"
+                                            value="arts" onChange={this.userFill} checked={this.state.reviewType === "arts"} />
+                                        <Label>Arts & Crafts</Label>
+                                    </FormGroup>
+                                </FormGroup>
+
+                                <div style={{ display: this.state.reviewType === "outdoor" ? "block" : 'none' }}>
+                                    <Row>
+                                        <Col>
+                                            <legend>Outdoor Adventure</legend>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col sm="4">
+                                            <FormGroup check inline>
+                                                <Input type="checkbox" name="tags" value="camping" onChange={this.tagList}
+                                                    checked={this.state.tags.includes("camping")} />
+                                                <Label check>Camping</Label>
+                                            </FormGroup>
+                                        </Col>
+                                        <Col sm="4">
+                                            <FormGroup check inline>
+                                                <Input type="checkbox" name="tags" value="hiking" onChange={this.tagList}
+                                                    checked={this.state.tags.includes("hiking")} />
+                                                <Label check>Hiking</Label>
+                                            </FormGroup>
+                                        </Col>
+                                        <Col sm="4">
+                                            <FormGroup check inline>
+                                                <Input type="checkbox" name="tags" value="sky-diving" onChange={this.tagList}
+                                                    checked={this.state.tags.includes("sky-diving")} />
+                                                <Label check>Sky-Diving</Label>
+                                            </FormGroup>
+                                        </Col>
+                                    </Row>
+                                </div>
+                                <div style={{ display: this.state.reviewType === "cultural" ? "block" : 'none' }}>
+                                    <Row>
+                                        <Col>
+                                            <legend>Cultural Immersion</legend>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col sm="4">
+                                            <FormGroup check inline>
+                                                <Input type="checkbox" name="tags" value="ethnic" onChange={this.tagList}
+                                                    checked={this.state.tags.includes("ethnic")} />
+                                                <Label check>Cultural Exchange</Label>
+                                            </FormGroup>
+                                        </Col>
+                                        <Col sm="4">
+                                            <FormGroup check inline>
+                                                <Input type="checkbox" name="tags" value="cooking" onChange={this.tagList}
+                                                    checked={this.state.tags.includes("cooking")} />
+                                                <Label check>Local Cooking Class</Label>
+                                            </FormGroup>
+                                        </Col>
+                                        <Col sm="4">
+                                            <FormGroup check inline>
+                                                <Input type="checkbox" name="tags" value="sport" onChange={this.tagList}
+                                                    checked={this.state.tags.includes("sport")} />
+                                                <Label check>Local Sport Activity</Label>
+                                            </FormGroup>
+                                        </Col>
+                                    </Row>
+                                </div>
+                                <div style={{ display: this.state.reviewType === "arts" ? "block" : 'none' }}>
+                                    <Row>
+                                        <Col>
+                                            <legend>Arts & Crafts</legend>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col sm="4">
+                                            <FormGroup check inline>
+                                                <Input type="checkbox" name="tags" value="pottery" onChange={this.tagList}
+                                                    checked={this.state.tags.includes("pottery")} />
+                                                <Label check>Pottery Making</Label>
+                                            </FormGroup>
+                                        </Col>
+                                        <Col sm="4">
+                                            <FormGroup check inline>
+                                                <Input type="checkbox" name="tags" value="kite" onChange={this.tagList}
+                                                    checked={this.state.tags.includes("kite")} />
+                                                <Label check>Kite Making</Label>
+                                            </FormGroup>
+                                        </Col>
+                                        <Col sm="4">
+                                            <FormGroup check inline>
+                                                <Input type="checkbox" name="tags" value="painting" onChange={this.tagList}
+                                                    checked={this.state.tags.includes("painting")} />
+                                                <Label check>Cultural Painting</Label>
+                                            </FormGroup>
+                                        </Col>
+                                    </Row>
+                                </div>
+                                <Row>
+                                    <Col>
+                                        <legend>Activity Details</legend>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col sm="4" md="6">
+                                        <FormGroup>
+                                            <Label>Activity Package</Label>
+                                            <Input type="text" name="nameOfPlace"
+                                                value={this.state.nameOfPlace} onChange={this.userFill} />
+                                        </FormGroup>
+                                    </Col>
+                                    <Col sm="4" md="6">
+                                        <FormGroup>
+                                            <Label>Location</Label>
+                                            <Input type="text" name="address"
+                                                value={this.state.address} onChange={this.userFill} />
+                                        </FormGroup>
+                                    </Col>
+                                </Row>
+
+                                {/* Description */}
+                                {this.templateFields()}
+                            </div>
+                            {/* End of activity workshop */}
+                        </Form>
+                    </Container>
+                </div>
+                <div style={{ display: this.state.status === false ? 'block' : 'none' }}>
+                    <React.Fragment>
+                        <h3 className="page-title-display">Error posting. Please check that all fields are filled up.</h3>
+                        <Link to="#"><Button color="danger" size="sm">Ok</Button></Link>
+                    </React.Fragment>
+                </div>
+
             </React.Fragment >
         )
     }
