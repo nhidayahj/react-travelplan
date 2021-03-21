@@ -243,6 +243,9 @@ export default class Australia extends React.Component {
     render() {
         return (
             <React.Fragment>
+                <div className="page-img-header">
+                    <div className="country-img-kor"></div>
+                </div>
                 <Container>
                     <div className="filter-section">
                         <button value="Home" className="filter-btn" onClick={this.filterBtn}>Home</button>

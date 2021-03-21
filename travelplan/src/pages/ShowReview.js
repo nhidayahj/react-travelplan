@@ -8,7 +8,7 @@ const baseUrl = "https://3001-tan-dog-b6spunp9.ws-us03.gitpod.io/";
 export default class ShowReview extends React.Component {
     state = {
         edit_review: [],
-        all_country: [],
+        edit_country: [],
         review_id: this.props.location.state,
         country: "",
         city: "",
@@ -26,10 +26,13 @@ export default class ShowReview extends React.Component {
         let editReview = await axios.get(baseUrl
             + this.state.review_id.review_id + "/update")
         this.setState({
-            edit_review: editReview.data,
+            edit_review: [editReview.data[0]],
+            edit_country:editReview.data[1],
         })
+        let countryName = this.state.edit_country[0].country
         for (let i of this.state.edit_review) {
             this.setState({
+                country:countryName.charAt(0).toUpperCase() + countryName.slice(1),
                 city: i.city_town,
                 nameOfPlace: i.name_of_place,
                 address: i.review_address,
@@ -105,7 +108,7 @@ export default class ShowReview extends React.Component {
                                 <Col sm="4" md="6">
                                     <FormGroup>
                                         <legend>Country</legend>
-                                        <Input type="select" name="country" value={this.state.country} onChange={this.updateForm}>
+                                        <Input type="select" name="country" value={this.state.country} onChange={this.updateForm} disabled>
                                             <option value="Australia">Australia</option>
                                             <option value="Japan">Japan</option>
                                             <option value="Korea">Korea</option>

@@ -22,10 +22,10 @@
 
 .page-img {
     margin-top:10px;
-    height:50vh;
+    height:58vh;
     background-color: white;
-    background-image: url("https://www.forestway.org/wp-content/uploads/2020/06/solo_travel_germany.jpeg");
-    background-position: center;
+    background-image: url("https://images.wallpaperscraft.com/image/travel_adventure_words_170050_2560x1080.jpg");
+    background-position: top;
     background-repeat: no-repeat;
     position:relative
 }
@@ -148,7 +148,7 @@
 .page-img-header {
     border:1px solid black;
     background-color: #f0b3ff;
-    height:45vh;
+    height:55vh;
 }
 
 .country-img-aus {
@@ -161,7 +161,7 @@
 }
 
 .country-img-jap {
-    background-image: url("https://wonderfulengineering.com/wp-content/uploads/2015/06/japan-wallpaper-9.jpg");
+    background-image: url("https://i1.wp.com/wallur.com/wp-content/uploads/2016/12/kyoto-background-10.jpg?fit=1920%2C1080");
     position:relative;
     background-position:center;
     background-size:cover;
@@ -173,6 +173,24 @@
     background-image: url("https://wallpaperaccess.com/full/300869.jpg");
     position:relative;
     background-position:center;
+    background-size:cover;
+    background-repeat: no-repeat;
+    height:100%;
+}
+
+.country-img-kor {
+    background-image: url("https://img.fishtailtravel.com/ContentImages/KOREA-JAPAN-0-2048x1217.jpeg");
+    position:relative;
+    background-position:center;
+    background-size:cover;
+    background-repeat: no-repeat;
+    height:100%;
+}
+
+.country-img-thai {
+    background-image: url("https://wallpapercave.com/wp/wp2899843.jpg");
+    position:relative;
+    background-position:bottom;
     background-size:cover;
     background-repeat: no-repeat;
     height:100%;
@@ -222,7 +240,7 @@
 .filter-result {
     margin: 17px 10px 30px;
     border:2px solid aquamarine;
-    height:46vh;
+    height:55vh;
     background-color:white ;
     position:relative;
 }
@@ -430,7 +448,7 @@
         margin:5px 12px;
     }
     .filter-result{
-        height:75vh;
+        height:97vh;
     }
     .filter-img {
         margin-left: 0;
@@ -443,7 +461,7 @@
         object-fit: cover;
     }
     .filter-info{
-        height:48vh;
+        height:63vh;
         width:100%;
         margin-left: auto;
         bottom:0;
