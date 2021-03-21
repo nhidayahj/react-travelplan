@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { Container, Row, Col, Form, FormGroup, Label, Input, Button } from 'reactstrap';
+import {Link} from 'react-router-dom'
 
 
 const baseUrl = "https://3001-tan-dog-b6spunp9.ws-us03.gitpod.io/";
@@ -276,7 +277,7 @@ export default class ShowReview extends React.Component {
 
                             <div className="review-form-btns">
                                 <Button className="update" color="info" onClick={this.submitUpdate}>Update</Button>{' '}
-                                <Button color="danger" onClick={this.deletePost}>Delete</Button>
+                                <Link to="/"><Button color="danger" onClick={this.deletePost}>Delete</Button></Link>
                             </div>
                         </div>
                         {/* End of Accommodation form */}
