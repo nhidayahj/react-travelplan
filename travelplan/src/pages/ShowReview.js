@@ -90,11 +90,13 @@ export default class ShowReview extends React.Component {
         // } else {
         //     //error to show? 
         // }
+        window.location = `/${this.state.country.toLowerCase()}`
     }
 
     deletePost = async () => {
         let confirmDelete = await axios.post(`https://3001-tan-dog-b6spunp9.ws-us03.gitpod.io/review/${this.state.edit_review[0]._id}/delete`)
         console.log("Items deleted ", confirmDelete)
+        window.location = `/${this.state.country.toLowerCase()}`
     }
 
     render() {

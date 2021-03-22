@@ -168,6 +168,7 @@ export default class CreateReview extends React.Component {
             this.setState({
                 status: true
             })
+            window.location = `/${this.state.country.toLowerCase()}`
         } else {
             this.setState({
                 status: false
@@ -178,7 +179,6 @@ export default class CreateReview extends React.Component {
         console.log(all_review)
         console.log(all_review.data)
         console.log("review id: ", all_review.data._id)
-
     }
 
     render() {

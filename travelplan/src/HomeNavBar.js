@@ -62,9 +62,22 @@ function HomeNavBar(props) {
                             </Link>
                       </DropdownMenu>
                     </UncontrolledDropdown>
-                    <NavItem>
+                    <UncontrolledDropdown nav inNavbar>
+                      <DropdownToggle nav caret>
+                        Reviews
+                      </DropdownToggle>
+                      <DropdownMenu right>
+                            <Link to="/create">
+                                <DropdownItem>
+                                Create
+                                </DropdownItem>
+                            </Link>
+                            
+                      </DropdownMenu>
+                    </UncontrolledDropdown>
+                    {/* <NavItem>
                       <Link to="/create">Create Review</Link>
-                    </NavItem>
+                    </NavItem> */}
                   </Nav>
 
                 </Collapse>
