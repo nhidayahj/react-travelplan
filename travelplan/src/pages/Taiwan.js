@@ -9,7 +9,7 @@ import {
 import { Link } from 'react-router-dom';
 
 
-const baseUrl = "https://3001-tan-dog-b6spunp9.ws-us03.gitpod.io/taiwan"
+const baseUrl = "https://nhj-travelplan-project-tgc11.herokuapp.com/taiwan"
 
 export default class Taiwan extends React.Component {
     state = {

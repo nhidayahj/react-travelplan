@@ -11,7 +11,7 @@ import Taiwan from './pages/Taiwan';
 import Thailand from './pages/Thailand';
 import ShowReview from './pages/ShowReview';
 import CreateReview from './pages/CreateReview';
-import Plan from './pages/Plan';
+
 
 
 function App() {
@@ -43,9 +43,7 @@ function App() {
                 <Route exact path="/create">
                     <CreateReview/>
                 </Route>
-                <Route exact path="/plan">
-                    <Plan/>
-                </Route>
+                
             </Switch>
         </Router>
     );

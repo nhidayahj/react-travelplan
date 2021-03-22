@@ -1,6 +1,6 @@
 import './App.css';
 import React, { useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
     Collapse,
@@ -8,7 +8,6 @@ import {
     NavbarToggler,
     NavbarBrand,
     Nav,
-    NavItem,
     UncontrolledDropdown,
     DropdownToggle,
     DropdownMenu,

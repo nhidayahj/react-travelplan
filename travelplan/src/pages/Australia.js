@@ -8,7 +8,7 @@ import {
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
-const baseUrl = "https://3001-tan-dog-b6spunp9.ws-us03.gitpod.io/australia";
+const baseUrl = "https://nhj-travelplan-project-tgc11.herokuapp.com/";
 
 
 
@@ -26,7 +26,7 @@ export default class Australia extends React.Component {
     }
 
     async componentDidMount() {
-        let response = await axios.get(baseUrl + "/all")
+        let response = await axios.get(baseUrl + "australia/all")
         this.setState({
             all_reviews: response.data[0],
             country: [response.data[1]],

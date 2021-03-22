@@ -6,7 +6,7 @@ import {
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
-const baseUrl = "https://3001-tan-dog-b6spunp9.ws-us03.gitpod.io/japan"
+const baseUrl = "https://nhj-travelplan-project-tgc11.herokuapp.com/japan"
 
 export default class Japan extends React.Component {
     state = {

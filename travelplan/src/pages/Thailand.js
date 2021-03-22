@@ -7,7 +7,7 @@ import {
     Button, Badge
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
-const baseUrl = "https://3001-tan-dog-b6spunp9.ws-us03.gitpod.io/thailand"
+const baseUrl = "https://nhj-travelplan-project-tgc11.herokuapp.com/thailand"
 
 export default class Thailand extends React.Component {
     state = {

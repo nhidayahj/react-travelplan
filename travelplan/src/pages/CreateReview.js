@@ -1,10 +1,10 @@
 import React from 'react'
 import axios from 'axios'
 import { Container, Row, Col, Form, FormGroup, Label, Input, Button } from 'reactstrap';
-import { Link, Redirect } from 'react-router-dom';
-import Homepage from './Homepage';
+import { Link } from 'react-router-dom';
 
-const baseUrl = "https://3001-tan-dog-b6spunp9.ws-us03.gitpod.io";
+
+const baseUrl = "https://nhj-travelplan-project-tgc11.herokuapp.com";
 
 
 export default class CreateReview extends React.Component {
@@ -128,25 +128,6 @@ export default class CreateReview extends React.Component {
             </React.Fragment>
         )
     }
-
-    redirectPage() {
-
-    }
-
-    // displayConfirm(status) {
-    //     if (status === true) {
-    //         return (
-    //             <React.Fragment>
-    //                 <h3 className="page-title-display">Thank you for sharing!</h3>
-    //                 <Link to="/"><Button color="success" size="sm">Ok!</Button></Link>
-    //             </React.Fragment>)
-    //     } else if (status === false) {
-    //         return (
-                
-    //         )
-    //     }
-    // }
-
 
     submitReview = async () => {
         let all_review = await axios.post(baseUrl + '/createreviews', {
