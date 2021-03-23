@@ -8,7 +8,7 @@ import {
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
-const baseUrl = "https://nhj-travelplan-project-tgc11.herokuapp.com/";
+const baseUrl = "https://nhj-travelplan-project-tgc11.herokuapp.com/australia";
 
 
 
@@ -27,7 +27,7 @@ export default class Australia extends React.Component {
 
     async componentDidMount() {
         document.title = 'wanderLust - Australia';
-        let response = await axios.get(baseUrl + "australia/all")
+        let response = await axios.get(baseUrl + "/all")
         this.setState({
             all_reviews: response.data[0],
             country: [response.data[1]],
@@ -46,24 +46,6 @@ export default class Australia extends React.Component {
         })
     }
 
-
-
-    // renderCountryInfo() {
-    //     let info_accum = [];
-    //     for (let i of this.state.country) {
-    //         info_accum.push(
-    //             <div className="country-header">
-    //                 <h3 className="country-name">Australia</h3>
-    //                 <div className="page-img-header">
-    //                     <div className="country-img">
-    //                         {/* <img src={i.image_url} className="country-img-url" alt="uploaded img"></img> */}
-    //                     </div>
-    //                 </div>
-    //             </div>
-    //         )
-    //     }
-    //     return info_accum;
-    // }
 
     userReview(userId) {
         for (let user of this.state.country_users) {
@@ -205,17 +187,20 @@ export default class Australia extends React.Component {
                 newResult: searchQuery.data
             })
             console.log("Search by City & Tags: ", searchQuery.data)
-        } else if (this.state.queryCity) {
+        } else if (this.state.queryCity !== "") {
             searchQuery = await axios.post(baseUrl, {
-                queryCity: this.state.queryCity
+                queryCity: this.state.queryCity,
+                // queryTags: this.state.queryTags
             })
             this.setState({
                 newResult: searchQuery.data
             })
             console.log("Search by city: ", searchQuery.data)
-        } else if (this.state.queryTags) {
+        } else if (this.state.queryTags !== "") {
+            console.log("tags search")
             searchQuery = await axios.post(baseUrl, {
-                queryTags: this.state.queryTags
+                queryTags: this.state.queryTags,
+                queryCity:this.state.queryCity
             })
             this.setState({
                 newResult: searchQuery.data
