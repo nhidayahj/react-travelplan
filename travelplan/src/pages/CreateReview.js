@@ -21,6 +21,7 @@ export default class CreateReview extends React.Component {
         image: "",
         ratings: "",
         tags: [],
+        invalid: false
 
     }
 
@@ -133,37 +134,60 @@ export default class CreateReview extends React.Component {
         )
     }
 
-    submitReview = async () => {
-        let all_review = await axios.post(baseUrl + '/createreviews', {
-            user: this.state.username,
-            username: this.state.username,
-            usercode: this.state.usercode,
-            countryName: this.state.country.toLowerCase(),
-            cityTown: this.state.city,
-            reviewCategory: this.state.reviewCategory,
-            reviewType: this.state.reviewType,
-            nameOfPlace: this.state.nameOfPlace,
-            reviewAddress: this.state.address,
-            reviewTags: this.state.tags,
-            reviewDesc: this.state.reviewDesc,
-            imageLink: this.state.image,
-            ratings: this.state.ratings,
-        })
-        if (all_review.status === 200) {
-            this.setState({
-                status: true
-            })
-            window.location = `/${this.state.country.toLowerCase()}`
-        } else {
-            this.setState({
-                status: false
-            })
-        }
-        // this.displayConfirm(all_review.status);
+    invalidAlert = () => {
+        return alert("Please fill up all fields.")
+    }
 
-        console.log(all_review)
-        console.log(all_review.data)
-        console.log("review id: ", all_review.data._id)
+
+    submitReview = async () => {
+        if (this.state.username === "" ||
+            this.state.city === "" ||
+            this.state.reviewType === "" ||
+            this.state.nameOfPlace === "" ||
+            this.state.address === "" ||
+            this.state.reviewCategory === "" ||
+            this.state.reviewDesc === "" ||
+            this.state.image === "" ||
+            this.state.ratings === "" ||
+            this.state.tags === "") {
+            this.setState({
+                invalid: true
+            })
+            this.invalidAlert()
+        }
+        if (this.state.invalid === false) {
+            let all_review = await axios.post(baseUrl + '/createreviews', {
+                user: this.state.username,
+                username: this.state.username,
+                usercode: this.state.usercode,
+                countryName: this.state.country.toLowerCase(),
+                cityTown: this.state.city,
+                reviewCategory: this.state.reviewCategory,
+                reviewType: this.state.reviewType,
+                nameOfPlace: this.state.nameOfPlace,
+                reviewAddress: this.state.address,
+                reviewTags: this.state.tags,
+                reviewDesc: this.state.reviewDesc,
+                imageLink: this.state.image,
+                ratings: this.state.ratings,
+            })
+            if (all_review.status === 200) {
+                this.setState({
+                    status: true
+                })
+                window.location = `/${this.state.country.toLowerCase()}`
+            } else {
+                this.setState({
+                    status: false
+                })
+            }
+            // this.displayConfirm(all_review.status);
+
+            console.log(all_review)
+            console.log(all_review.data)
+            console.log("review id: ", all_review.data._id)
+        }
+
     }
 
     render() {

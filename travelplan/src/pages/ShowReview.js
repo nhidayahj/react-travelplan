@@ -86,17 +86,14 @@ export default class ShowReview extends React.Component {
         console.log("new bject: ", updatedObj)
         let updateNewReview = await axios.put(`https://nhj-travelplan-project-tgc11.herokuapp.com/review/${this.state.edit_review[0]._id}/update`, updatedObj)
         console.log("New updated data:", updateNewReview.data);
-        // if (Response.data.status == 200 ){
-        //     //redirect to specific page
-        // } else {
-        //     //error to show? 
-        // }
+        alert("Thank you for your updates!")
         window.location = `/${this.state.country.toLowerCase()}`
     }
 
     deletePost = async () => {
         let confirmDelete = await axios.post(`https://nhj-travelplan-project-tgc11.herokuapp.com/review/${this.state.edit_review[0]._id}/delete`)
         console.log("Items deleted ", confirmDelete)
+        alert("Review is successfully deleted.")
         window.location = `/${this.state.country.toLowerCase()}`
     }
 
