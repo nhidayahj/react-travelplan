@@ -190,7 +190,7 @@ export default class Australia extends React.Component {
         } else if (this.state.queryCity !== "") {
             searchQuery = await axios.post(baseUrl, {
                 queryCity: this.state.queryCity,
-                // queryTags: this.state.queryTags
+                queryTags: this.state.queryTags
             })
             this.setState({
                 newResult: searchQuery.data
