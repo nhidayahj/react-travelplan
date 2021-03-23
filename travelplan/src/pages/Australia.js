@@ -187,7 +187,7 @@ export default class Australia extends React.Component {
                 newResult: searchQuery.data
             })
             console.log("Search by City & Tags: ", searchQuery.data)
-        } else if (this.state.queryCity !== "") {
+        } else if (this.state.queryCity) {
             searchQuery = await axios.post(baseUrl, {
                 queryCity: this.state.queryCity,
                 queryTags: this.state.queryTags
@@ -196,7 +196,7 @@ export default class Australia extends React.Component {
                 newResult: searchQuery.data
             })
             console.log("Search by city: ", searchQuery.data)
-        } else if (this.state.queryTags !== "") {
+        } else if (this.state.queryTags) {
             console.log("tags search")
             searchQuery = await axios.post(baseUrl, {
                 queryTags: this.state.queryTags,
