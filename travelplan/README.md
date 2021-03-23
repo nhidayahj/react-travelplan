@@ -15,7 +15,8 @@ to do more flexible searches such as:
 
 These searches can operate standalone or on combination. 
 
-Live demo can be found here: https://modest-wright-0d9843.netlify.app
+Live demo can be found here: [wanderLust](https://elegant-keller-825673.netlify.app/)
+
 
 # Strategy 
 ## Identifying External users
