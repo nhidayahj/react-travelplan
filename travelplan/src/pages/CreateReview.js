@@ -24,6 +24,10 @@ export default class CreateReview extends React.Component {
 
     }
 
+    componentDidMount = () => {
+        document.title = 'wanderLust - create review';
+    };
+
     userFill = (e) => {
         this.setState({
             [e.target.name]: e.target.value

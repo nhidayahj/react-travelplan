@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Row, Col } from 'reactstrap'
+import { Container, Col } from 'reactstrap'
 import {
     Card, CardImg, CardText, CardBody,
     CardTitle, Badge
@@ -17,6 +17,7 @@ export default class Homepage extends React.Component {
     }
 
     async componentDidMount() {
+        document.title = 'wanderLust - Home';
         let result = await axios.get(baseUrl)
         this.setState({
             all_countries: result.data[0],

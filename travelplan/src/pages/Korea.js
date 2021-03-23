@@ -24,6 +24,7 @@ export default class Korea extends React.Component {
     }
 
     async componentDidMount() {
+        document.title = 'wanderLust - Korea';
         let response = await axios.get(baseUrl + "/all")
         this.setState({
             all_reviews: response.data[0],

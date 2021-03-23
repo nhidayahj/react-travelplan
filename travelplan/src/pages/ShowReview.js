@@ -24,6 +24,7 @@ export default class ShowReview extends React.Component {
     }
 
     async componentDidMount() {
+        document.title = 'wanderLust - Edit review';
         let editReview = await axios.get(baseUrl
             + this.state.review_id.review_id + "/update")
         this.setState({
