@@ -15,6 +15,8 @@ to do more flexible searches such as:
 
 These searches can operate standalone or on combination. 
 
+Live demo can be found here: https://modest-wright-0d9843.netlify.app
+
 # Strategy 
 ## Identifying External users
 While this page can be useful for people who are planning their trip's itinerary, it can also be a general 
@@ -85,6 +87,11 @@ User can post review by selecting a country, review category and type of review 
 ### Edit reviews 
 User has the option to update or delete their posted reviews
 
+# Skeleton
+![home-country](https://user-images.githubusercontent.com/60766668/112158573-438d2680-8c23-11eb-92f7-90d6c8c4ce9f.png)
+![create-edit](https://user-images.githubusercontent.com/60766668/112159202-d928b600-8c23-11eb-8a6e-3d3053836eb7.png)
+![filter-search](https://user-images.githubusercontent.com/60766668/112159750-72f06300-8c24-11eb-9d75-1e8fd5393f12.png)
+
 # Surface 
 ## Theme 
 The theme of this webpage is simplicity and images are the main attractive feature in this webpage. 
@@ -100,6 +107,26 @@ can glance through it briefly.
 
 # Features 
 ## Deployment 
+Live deployment of **wanderLust travelplan** is deployed to Netlify. API for reviews and travel 
+information is hosted on Heroku. MongoDB is used to structure the documents together. API details 
+can be found at https://github.com/nhidayahj/express-travelplan using Express framework. 
+
+## Deploying  API to Heroku
+The API is hosted on Heroku by cloning the repository and ensuring that folders and file are in the 
+root directory. Using [Heroku's CLI](https://devcenter.heroku.com/articles/heroku-cli) in your terminal to link your repository
+to Heroku, and login to Heroku to create a Heroku app using ```heroku create <app name>```. 
+Before pushing to Heroku using ```git push heroku master``` OR  ```git push heroku <branch_name>``` ensure the 
+following conditions are met: 
+- your .gitignore contains ```node_modules``` and any ```.env``` files
+- A **Procfile** is created with a captial letter 'P' and no extension and include ```web:node index.js```
+- After creating the app on Heroku, set up the **config variables** in Heroku's setting page. It should contain
+the following:
+    - MONGO_URL(for MongoDB CRUD)
+
+
+## Deploying wanderLust to Netlify
+When cloning the repository, ensure that all folders and files are in the root directory (i.e. same directory as your .git directory).
+Then log in to your Netlify, and deploy a new site using 'New site from Git'  
 
 # Technologies Used 
 - [React](https://reactjs.org/)
