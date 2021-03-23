@@ -190,7 +190,7 @@ export default class Australia extends React.Component {
         } else if (this.state.queryCity) {
             searchQuery = await axios.post(baseUrl, {
                 queryCity: this.state.queryCity,
-                queryTags: this.state.queryTags
+                
             })
             this.setState({
                 newResult: searchQuery.data
@@ -200,7 +200,7 @@ export default class Australia extends React.Component {
             console.log("tags search")
             searchQuery = await axios.post(baseUrl, {
                 queryTags: this.state.queryTags,
-                queryCity:this.state.queryCity
+               
             })
             this.setState({
                 newResult: searchQuery.data
